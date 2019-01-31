@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "classify-header": "./../common/classify-header",
+        "cml-buildin-scroller": "./../../npm/chameleon-ui-builtin/components/scroller/scroller"
+    },
+    "navigationBarTitleText": "分类",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2",
+    "component": true
+}

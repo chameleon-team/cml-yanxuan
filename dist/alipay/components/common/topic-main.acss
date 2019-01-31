@@ -1,0 +1,111 @@
+.iconfont {
+  font-family: iconfont;
+}
+.wrapper {
+  background-color: #fff;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+}
+.auther-box {
+  height: 75rpx;
+  padding-top: 10rpx;
+  padding-left: 25rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.auther-img {
+  height: 58rpx;
+  width: 58rpx;
+  border-radius: 58rpx;
+}
+.auther-name {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 26rpx;
+  height: 58rpx;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+}
+.img-box,
+.wd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 750rpx;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.main-img {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 380rpx;
+}
+.sub-imgs-box {
+  width: 190rpx;
+  height: 380rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.sub-img {
+  height: 188rpx;
+  width: 190rpx;
+  margin-left: 3rpx;
+  margin-bottom: 3rpx;
+}
+.tlt-box {
+  height: 80rpx;
+  padding: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  box-sizing: border-box;
+}
+.tlt {
+  font-size: 34rpx;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  overflow: hidden;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.price {
+  font-size: 34rpx;
+  color: #b4282d;
+  padding-left: 10rpx;
+}
+.info-box {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.info {
+  font-size: 26rpx;
+  overflow: hidden;
+  lines: 2;
+  text-overflow: ellipsis;
+  color: #666;
+}

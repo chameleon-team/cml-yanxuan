@@ -1,0 +1,8 @@
+<view class="carousel  cml-base cml-view" bindtab="_cmlEventProxy" data-eventtab="forbinding">
+  <swiper class="carousel-container  cml-base cml-carousel" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}" autoplay="{{true}}">
+    <swiper-item class="carousel-carousel-item  cml-base cml-carousel-item" wx:for="{{bannerImgList}}" wx:for-index="i" wx:for-item="item" data-idx="{{i}}">
+      <image src="{{item.imgUrl}}" class="Img  cml-base cml-image" />
+    </swiper-item>
+
+  </swiper>
+</view>

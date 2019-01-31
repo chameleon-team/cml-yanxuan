@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+        "shop-header": "./../common/shop-header",
+        "shop-list": "./../common/shop-list",
+        "cml-buildin-scroller": "./../../npm/chameleon-ui-builtin/components/scroller/scroller"
+    },
+    "navigationBarTitleText": "购物车",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2",
+    "component": true
+}

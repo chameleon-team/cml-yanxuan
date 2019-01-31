@@ -1,0 +1,118 @@
+.iconfont {
+  font-family: iconfont;
+}
+.wrapper {
+  background-color: #f4f4f4;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.w-ipx {
+  margin-top: 40rpx;
+  margin-bottom: 50rpx;
+}
+.class-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.class-list {
+  position: absolute;
+  top: 0;
+  bottom: 90rpx;
+  left: 0;
+  box-sizing: border-box;
+  width: 162rpx;
+  margin-top: 113rpx;
+  /*margin-bottom: 90cpx;*/
+  border-right-color: #d9d9d9;
+  background-color: #fff;
+  border-right-style: solid;
+  height: 1500rpx;
+}
+.class-txt {
+  font-size: 28rpx;
+  margin-top: 22rpx;
+  margin-bottom: 26rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  text-align: center;
+  color: #333;
+}
+.main-list {
+  position: fixed;
+  top: 0;
+  bottom: 90rpx;
+  left: 162rpx;
+  right: 0;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  margin-top: 113rpx;
+  /*margin-bottom: 90cpx;*/
+  background-color: #fff;
+}
+.ad-img {
+  width: 532rpx;
+  height: 194rpx;
+  border-radius: 6rpx;
+  margin: 28rpx;
+}
+.sub-tlt {
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  color: #333;
+  margin-top: 10rpx;
+  margin-bottom: 30rpx;
+}
+.sub-box {
+  padding-left: 26rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.sub-i {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 178rpx;
+  height: 200rpx;
+}
+.i-img {
+  width: 150rpx;
+  margin-left: 14rpx;
+  margin-right: 14rpx;
+  height: 150rpx;
+}
+.i-name {
+  font-size: 22rpx;
+  text-align: center;
+}

@@ -1,0 +1,20 @@
+<view class="wrapper  cml-base cml-view">
+  <classify-header class=" cml-base cml-classify-header"></classify-header>
+  <view class="class-list border-right-1px  cml-base cml-view">
+    <view class="main-list  cml-base cml-view"><cml-buildin-scroller height="{{scrollerHeight}}" class=" cml-base cml-scroller">
+      <view class="class-wrapper  cml-base cml-view">
+        <text class="class-txt  cml-base cml-text" a:for="{{classes}}">{{item}}</text>
+      </view>
+    </cml-buildin-scroller></view>
+  </view>
+  <view class="main-list  cml-base cml-view"><cml-buildin-scroller class="main-list  cml-base cml-scroller" height="{{scrollerHeight}}">
+    <image class="ad-img  cml-base cml-image" resize="cover" src="http://yanxuan.nosdn.127.net/3ebd7addcc0d101d116052a57cec2f16.png"></image>
+    <text class="sub-tlt  cml-base cml-text"> --- 推荐区分类 --- </text>
+    <view class="sub-box  cml-base cml-view">
+      <view class="sub-i  cml-base cml-view" a:for="{{subclasses}}" onTap="_cmlEventProxy" data-eventtap="godetail" onCmlPropsEventProxy="_cmlPropsEventProxy">
+        <image class="i-img  cml-base cml-image" resize="contain" src="{{item.img}}"></image>
+        <text class="i-name  cml-base cml-text">{{item.name}}</text>
+      </view>
+    </view>
+  </cml-buildin-scroller></view>
+</view>

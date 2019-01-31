@@ -1,0 +1,11 @@
+.carousel-container {
+  height: 370rpx;
+}
+.carousel-carousel-item {
+  width: 750rpx;
+  height: 370rpx;
+}
+.Img {
+  width: 750rpx;
+  height: 370rpx;
+}

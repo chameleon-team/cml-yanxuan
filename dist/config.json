@@ -1,0 +1,62 @@
+[
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/index/index"
+        },
+        "web": {
+            "url": "https://www.chameleon.com#/"
+        },
+        "weex": {
+            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "query": {
+                "path": "/pages/index/index"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/list/list"
+        },
+        "web": {
+            "url": "https://www.chameleon.com#/cml/h5/list"
+        },
+        "weex": {
+            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "query": {
+                "path": "/pages/list/list"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/detail/detail"
+        },
+        "web": {
+            "url": "https://www.chameleon.com#/cml/h5/detail"
+        },
+        "weex": {
+            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "query": {
+                "path": "/pages/detail/detail"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/map/map"
+        },
+        "web": {
+            "url": "https://www.chameleon.com#/cml/h5/map"
+        },
+        "weex": {
+            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "query": {
+                "path": "/pages/map/map"
+            }
+        }
+    }
+]

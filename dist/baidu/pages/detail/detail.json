@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "cml-buildin-page": "./../../npm/chameleon-ui-builtin/components/page/page",
+        "cml-buildin-scroller": "./../../npm/chameleon-ui-builtin/components/scroller/scroller"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+}

@@ -1,0 +1,12 @@
+{
+    "usingComponents": {
+        "topic-header": "./../common/topic-header",
+        "topic-top": "./../common/topic-top",
+        "topic-main": "./../common/topic-main",
+        "cml-buildin-scroller": "./../../npm/chameleon-ui-builtin/components/scroller/scroller"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2",
+    "component": true
+}

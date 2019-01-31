@@ -1,0 +1,42 @@
+.chameleon-content {
+  width: 750rpx;
+  overflow-x: hidden;
+}
+.content-main {
+  width: 3750rpx;
+  background: #9F8A60;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.home {
+  width: 750rpx;
+}
+.classify {
+  width: 750rpx;
+  /*background: blue;*/
+}
+.things {
+  width: 750rpx;
+}
+.cart {
+  width: 750rpx;
+}
+.person {
+  width: 750rpx;
+}
+.footer-zhanwei {
+  height: 100rpx;
+  width: 750rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+}
