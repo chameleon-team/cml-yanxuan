@@ -113,10 +113,8 @@
         this.bottomRefreshing = true;
       },
       getData() {
-        cml.request({
-          url: '/cml-yanxuan/mock/listImages.json',
-          method: 'get',
-          resDataType: 'json'
+        cml.get({
+          url: '/cml-yanxuan/mock/listImages.json'
         }).then(res => {
           if (res.code == 0) {
             const {topImgUrl, list} = res.data;

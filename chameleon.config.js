@@ -7,7 +7,7 @@ const apiPrefix = 'https://chameleon-team.github.io';
 cml.config.merge({
   templateLang: "cml",
   templateType: "html",
-  platforms: ["web","weex","wx"],
+  platforms: ["web","baidu","alipay"],
   buildInfo: {
     wxAppId: '123456'
   },

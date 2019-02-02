@@ -1,9 +1,9 @@
 <template>
   <view c-bind:tab="forbinding">
     <view class="amap-wrapper" c-bind:tab="forbinding">
-      <el-amap vid="amapDemo" :zoom="zoom" :center="center" class="amap-box">
-        <el-amap-marker vid="component-marker" :position="componentMarker.position"></el-amap-marker>
-      </el-amap>
+      <origin-el-amap vid="amapDemo" :zoom="zoom" :center="center" class="amap-box">
+        <origin-el-amap-marker vid="component-marker" :position="componentMarker.position"></origin-el-amap-marker>
+      </origin-el-amap>
     </view>
   </view>
 </template>
