@@ -1,8 +1,0 @@
-<view class="carousel  cml-base cml-view">
-  <view class="carousel-container  cml-base cml-view"><swiper class="carousel-container  cml-base cml-carousel" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}" autoplay="{{true}}">
-    <view class="carousel-carousel-item  cml-base cml-view"><swiper-item class="carousel-carousel-item  cml-base cml-carousel-item" a:for="{{bannerImgList}}" a:for-index="i" a:for-item="item" data-idx="{{i}}">
-      <image src="{{item.imgUrl}}" class="Img  cml-base cml-image" />
-    </swiper-item></view>
-
-  </swiper></view>
-</view>

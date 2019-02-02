@@ -1,9 +1,0 @@
-{
-    "pages": [
-        "pages/index/index",
-        "pages/list/list",
-        "pages/detail/detail",
-        "pages/map/map"
-    ],
-    "usingComponents": {}
-}

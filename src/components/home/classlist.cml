@@ -32,8 +32,8 @@ class Classlist {
 
   created() {
 
-    cml.get({
-      url: '/cml-yanxuan/dist/getHomeImgList.json'
+    cml.request({
+      url: '/cml-yanxuan/mock/getHomeImgList.json'
     }).then(res => {
       if (res.code == 0) {
         const {classifyImgList} = res.data;

@@ -33,8 +33,8 @@
     }
     created() {
       const self = this;
-      cml.get({
-        url:'/cml-yanxuan/dist/yanxuan.json'
+      cml.request({
+        url:'/cml-yanxuan/mock/yanxuan.json'
       }).then(res=>{
         if(res.errno == 0) {
           let result = res.data.result;

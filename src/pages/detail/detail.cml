@@ -43,7 +43,7 @@
           <view class="section-money">
             <text class="class-money">{{money}}</text>
           </view>
-          <view class="section-tag" c-bind:tap="tiaozhuan">
+          <view class="section-tag" c-bind:tap="goto">
             <text class="section-tag-con">{{appTag}}</text>
           </view>
           <view class="section-evaluate">
@@ -80,9 +80,9 @@
       appTag: ''
     }
     methods = {
-      tiaozhuan() {
+      goto() {
         cml.open('https://cmljs.org',
-          {wd: 'didichuxing', time: new Date()},
+          {wd: 'chameleon', time: new Date()},
           {closeCurrent: false});
       },
       change() {
@@ -93,8 +93,8 @@
       }
     }
     created() {
-      cml.get({
-        url: '/cml-yanxuan/dist/detailInfo.json'
+      cml.request({
+        url: '/cml-yanxuan/mock/detailInfo.json'
       }).then(res => {
 
         if (res.code == 0) {

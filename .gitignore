@@ -1,0 +1,23 @@
+output
+node_modules
+.DS_Store
+npm-debug.log
+
+**/yarn-error.log
+**/yarn.lock
+
+flow-typed/npm/*
+
+# deploy temporary files
+target/*
+
+# ignore generated document
+doc/**/_book/*
+doc/dist/*
+
+# ignore dynamic generated document summary markdown
+doc/gitbook/SUMMARY.md
+
+# test coverage
+coverage/*
+

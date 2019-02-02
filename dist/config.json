@@ -8,7 +8,7 @@
             "url": "https://www.chameleon.com#/"
         },
         "weex": {
-            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "url": "https://beatles-chameleon.github.io/cml-yanxuan/dist/weex/cml-yanxuan.js",
             "query": {
                 "path": "/pages/index/index"
             }
@@ -23,7 +23,7 @@
             "url": "https://www.chameleon.com#/cml/h5/list"
         },
         "weex": {
-            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "url": "https://beatles-chameleon.github.io/cml-yanxuan/dist/weex/cml-yanxuan.js",
             "query": {
                 "path": "/pages/list/list"
             }
@@ -38,7 +38,7 @@
             "url": "https://www.chameleon.com#/cml/h5/detail"
         },
         "weex": {
-            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "url": "https://beatles-chameleon.github.io/cml-yanxuan/dist/weex/cml-yanxuan.js",
             "query": {
                 "path": "/pages/detail/detail"
             }
@@ -53,7 +53,7 @@
             "url": "https://www.chameleon.com#/cml/h5/map"
         },
         "weex": {
-            "url": "https://static.didialift.com/pinche/gift/wangyi/weex/yanxuan.js",
+            "url": "https://beatles-chameleon.github.io/cml-yanxuan/dist/weex/cml-yanxuan.js",
             "query": {
                 "path": "/pages/map/map"
             }

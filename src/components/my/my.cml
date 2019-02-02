@@ -101,23 +101,11 @@
   .fbs{
     position:relative;
     background-color: #f4f4f4;
-    /*padding-bottom: 1000cpx;*/
-    /*margin-bottom: -1000cpx;*/
   }
   .chameleo-logo {
     width: 50cpx;
     height: 50cpx;
     margin-bottom: 8cpx;
-  }
-  .scroller{
-    position: absolute;
-    top:0cpx;
-    bottom: 90cpx;
-    left: 0;
-    right: 0;
-  }
-  .ml-ipx{
-    margin-bottom: 140cpx;
   }
   .cell-button{
     margin-bottom: 18cpx;
@@ -125,9 +113,6 @@
   .header{
     position:relative;
     height: 360cpx;
-  }
-  .h-ipx{
-    height: 420cpx;
   }
   .header-bg{
     position: absolute;
@@ -196,19 +181,6 @@
     lines:1;
     text-overflow: ellipsis;
   }
-  .b-qrcode{
-    position: absolute;
-    bottom:80cpx;
-    right: 40cpx;
-    height: 80cpx;
-    width: 80cpx;
-    border-radius: 70cpx;
-    text-align: center;
-    font-size: 40cpx;
-    padding-top: 18cpx;
-    color:#fff;
-    background-color: rgba(255,255,255,.3);
-  }
   .s-box{
     position:relative;
     padding: 0 26cpx;
@@ -221,12 +193,6 @@
     display: block;
     font-size: 26cpx;
     padding-top: 34cpx;
-    color:#333;
-  }
-  .i-box-in{
-    position: absolute;
-    top:34cpx;
-    right: 30cpx;
     color:#333;
   }
   .box-line{
@@ -245,15 +211,6 @@
     align-items: center;
     justify-content: center;
   }
-  .i-box-icon{
-    box-sizing: border-box;
-    font-size: 50cpx;
-    text-align: center;
-    padding-top: 15cpx;
-    height:79cpx;
-    padding-bottom: 10cpx;
-    color:#666;
-  }
   .i-box-tlt{
     font-size: 26cpx;
     text-align: center;
@@ -266,15 +223,6 @@
     border-bottom-style: solid;
     border-bottom-width: 1cpx;
     border-bottom-color: rgba(0,0,0,.15) ;
-  }
-  .i-c-orange{
-    color:#ff744d;
-  }
-  .i-c-yellow{
-    color:#f6a121;
-  }
-  .i-c-blue{
-    color:#689de5;
   }
 </style>
 <script cml-type="json">

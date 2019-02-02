@@ -1,7 +1,7 @@
 module.exports = [
   {
     method: ['get', 'post'],
-    path: '/cml-yanxuan/dist/getHomeImgList.json',
+    path: '/cml-yanxuan/mock/getHomeImgList.json',
     controller: function (req, res, next) {
       res.json({
         code: 0,
@@ -39,7 +39,7 @@ module.exports = [
   },
   {
     method: ['get', 'post'],
-    path: '/cml-yanxuan/dist/listImages.json',
+    path: '/cml-yanxuan/mock/listImages.json',
     controller: function (req, res, next) {
       res.json({
         code: 0,
@@ -81,7 +81,7 @@ module.exports = [
   },
   {
     method: ['get', 'post'],
-    path: '/cml-yanxuan/dist/detailInfo.json',
+    path: '/cml-yanxuan/mock/detailInfo.json',
     controller: function (req, res, next) {
       res.json({
         code: 0,
@@ -119,7 +119,7 @@ module.exports = [
   },
   {
     method: ['get', 'post'],
-    path: '/cml-yanxuan/dist/yanxuan.json',
+    path: '/cml-yanxuan/mock/yanxuan.json',
     controller: function (req, res, next) {
       res.json({
         "errno": "0",
