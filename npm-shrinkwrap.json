@@ -10,22 +10,19 @@
       "integrity": "sha1-m7UwTS4LVmmLLHWLCKPqqdqlijk="
     },
     "chameleon-api": {
-      "version": "0.2.0",
-      "resolved": "https://registry.npmjs.org/chameleon-api/-/chameleon-api-0.2.0.tgz",
-      "integrity": "sha512-mojW8jCToPkJdX+RsepAe/ijqVC3PhACIulYd0Ap45Xh4iEB0HY/YRQtK9c//M/oqMxpzrUKXTwpNkHjSowQdQ==",
+      "version": "0.1.1",
+      "resolved": "https://registry.npmjs.org/chameleon-api/-/chameleon-api-0.1.1.tgz",
+      "integrity": "sha512-lUDZxugSUftAM3oqZP7zD5CJRQFEnIUCH6QsMWAEGRlVAeK/vmMzaM3e+7ZUYWS8EL4TlvrVFBIX6cbX+J0xpg==",
       "requires": {
         "chameleon-bridge": "0.1.0",
-        "child_process": "1.0.2",
-        "fetch-detector": "1.0.1",
-        "fetch-ie8": "1.5.0"
-      },
-      "dependencies": {
-        "chameleon-bridge": {
-          "version": "0.1.0",
-          "resolved": "https://registry.npmjs.org/chameleon-bridge/-/chameleon-bridge-0.1.0.tgz",
-          "integrity": "sha512-1Qc7F4ts0zlfglGn3VnVSPg3SRge37gu5/EQ+Mz8K3vqpRgoXGPN6cRtK+4wrvqox740gml+yWsuV10GY2xB1A=="
-        }
+        "fetch-detector": "^1.0.1",
+        "fetch-ie8": "^1.5.0"
       }
+    },
+    "chameleon-bridge": {
+      "version": "0.1.0",
+      "resolved": "https://registry.npmjs.org/chameleon-bridge/-/chameleon-bridge-0.1.0.tgz",
+      "integrity": "sha512-1Qc7F4ts0zlfglGn3VnVSPg3SRge37gu5/EQ+Mz8K3vqpRgoXGPN6cRtK+4wrvqox740gml+yWsuV10GY2xB1A=="
     },
     "chameleon-runtime": {
       "version": "0.0.5",
@@ -57,11 +54,6 @@
         "chameleon-scroll": "0.0.3"
       }
     },
-    "child_process": {
-      "version": "1.0.2",
-      "resolved": "https://registry.npmjs.org/child_process/-/child_process-1.0.2.tgz",
-      "integrity": "sha1-sffn/HPSXn/R1FWtyU4UODAYK1o="
-    },
     "classnames": {
       "version": "2.2.6",
       "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.2.6.tgz",
@@ -85,17 +77,27 @@
       "resolved": "https://registry.npmjs.org/fetch-ie8/-/fetch-ie8-1.5.0.tgz",
       "integrity": "sha1-8RQcP5bLyJN6oxsPvBp3AiD7wVs="
     },
+    "lodash": {
+      "version": "4.17.11",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz",
+      "integrity": "sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg=="
+    },
     "mobx": {
       "version": "3.6.1",
       "resolved": "https://registry.npmjs.org/mobx/-/mobx-3.6.1.tgz",
       "integrity": "sha1-rmOo8A4UhadA0Pka4val9o4wO+o="
+    },
+    "resize-detector": {
+      "version": "0.1.10",
+      "resolved": "https://registry.npmjs.org/resize-detector/-/resize-detector-0.1.10.tgz",
+      "integrity": "sha512-iLcXC8A6Fb0DfA+TRiywrK/0A22bFqkhntjMJMEzXDA4XkcEkfwpNbv7W8iewUiD0xYIaeiXOfiEehTqGKsUFw=="
     },
     "uppercamelcase": {
       "version": "1.1.0",
       "resolved": "https://registry.npmjs.org/uppercamelcase/-/uppercamelcase-1.1.0.tgz",
       "integrity": "sha1-Mk2YprOvx+iolT4QZBUJsOTiP5c=",
       "requires": {
-        "camelcase": "1.2.1"
+        "camelcase": "^1.2.1"
       }
     },
     "vue-amap": {
@@ -103,7 +105,16 @@
       "resolved": "https://registry.npmjs.org/vue-amap/-/vue-amap-0.5.8.tgz",
       "integrity": "sha512-VWU6M58jAY4K80QGi+2tYWxvAszd/MQiWkBEYdyu2ptBHAgsNfZz2zxR1mWL32V74Q2bFoZz4yfOycMrQywlUA==",
       "requires": {
-        "uppercamelcase": "1.1.0"
+        "uppercamelcase": "^1.1.0"
+      }
+    },
+    "vue-echarts": {
+      "version": "4.0.1",
+      "resolved": "https://registry.npmjs.org/vue-echarts/-/vue-echarts-4.0.1.tgz",
+      "integrity": "sha512-JgvIcr/btz4bAkafVm0aLyfkAdhGf2T8VIdESd2264Mlr5w0dZ0IOG3BJCvtznIlBJMiwQXAztc27Y3KGKdF5Q==",
+      "requires": {
+        "lodash": "^4.17.11",
+        "resize-detector": "^0.1.9"
       }
     },
     "vuex": {
