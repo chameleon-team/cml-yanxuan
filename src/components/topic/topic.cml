@@ -28,7 +28,9 @@
     }
     created() {
       cml.request({
-        url:'/cml-yanxuan/mock/yanxuan.json'
+        url:'/cml-yanxuan/mock/yanxuan.json',
+        method: 'get',
+        resDataType: 'json'
       }).then(res=>{
         if(res.errno == 0) {
           let result = res.data.result;

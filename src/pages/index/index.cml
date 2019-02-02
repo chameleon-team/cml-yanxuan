@@ -82,8 +82,10 @@
     }
 
     created() {
-      cml.get({
-        url: '/cml-yanxuan/mock/getHomeImgList.json'
+      cml.request({
+        url: '/cml-yanxuan/mock/getHomeImgList.json',
+        method: 'get',
+        resDataType: 'json'
       }).then(res => {
         if (res.code == 0) {
           const {special, disscountPriceImgUrl} = res.data;
