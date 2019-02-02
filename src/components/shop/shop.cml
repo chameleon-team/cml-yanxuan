@@ -34,8 +34,7 @@
     created() {
       const self = this;
       cml.request({
-        url:'/cml-yanxuan/mock/yanxuan.json',
-        resDataType: 'json'
+        url:'/cml-yanxuan/mock/yanxuan.json'
       }).then(res=>{
         if(res.errno == 0) {
           let result = res.data.result;

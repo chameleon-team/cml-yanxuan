@@ -114,8 +114,7 @@
       },
       getData() {
         cml.request({
-          url: '/cml-yanxuan/mock/listImages.json',
-          resDataType: 'json'
+          url: '/cml-yanxuan/mock/listImages.json'
         }).then(res => {
           if (res.code == 0) {
             const {topImgUrl, list} = res.data;

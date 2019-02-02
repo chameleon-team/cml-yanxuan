@@ -28,9 +28,8 @@
       }
     }
     created() {
-      cml.request({
-        url: '/cml-yanxuan/mock/getHomeImgList.json',
-        resDataType: 'json'
+      cml.get({
+        url: '/cml-yanxuan/mock/getHomeImgList.json'
       }).then(res => {
         if (res.code == 0) {
           const {bannerImgList} = res.data;

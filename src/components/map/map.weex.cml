@@ -13,7 +13,7 @@ class Map implements MapInterface {
     }
   }
   data= {
-      h5url: "https://chameleon-team.github.io/cml-yanxuan/dist/web/cml-yanxuan.html#/cml/h5/map",
+      h5url: "/cml-yanxuan/dist/web/cml-yanxuan.html#/cml/h5/map",
       name: '默认'
   }
   mounted() {
