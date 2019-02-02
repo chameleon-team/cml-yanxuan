@@ -94,7 +94,8 @@
     }
     created() {
       cml.request({
-        url: '/cml-yanxuan/mock/detailInfo.json'
+        url: '/cml-yanxuan/mock/detailInfo.json',
+        resDataType: 'json'
       }).then(res => {
 
         if (res.code == 0) {
