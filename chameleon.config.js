@@ -1,8 +1,8 @@
 
 // 设置静态资源的线上路径
-const publicPath = 'https://beatles-chameleon.github.io/cml-yanxuan/dist';
+const publicPath = 'https://chameleon-team.github.io/cml-yanxuan/dist';
 // 设置api请求前缀
-const apiPrefix = 'https://beatles-chameleon.github.io';
+const apiPrefix = 'https://chameleon-team.github.io';
 
 cml.config.merge({
   templateLang: "cml",
