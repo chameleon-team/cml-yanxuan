@@ -1,10 +1,7 @@
 <template>
   <page title="详情页">
     <view class="content">
-      <scroller
-        bottom-offset="{{20}}"
-        height="{{scrollHeight}}"
-      >
+      <myscroller>
         <view>
           <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
             <carousel-item
@@ -63,7 +60,7 @@
         <view class="map">
           <map></map>
         </view>
-      </scroller>
+      </myscroller>
     </view>
   </page>
 </template>
@@ -302,6 +299,7 @@
   {
     "base": {
       "usingComponents": {
+          "myscroller": "./myscroller/myscroller",
           "map": "/components/map/map"
       },
       "navigationBarTitleText": "详情页",
