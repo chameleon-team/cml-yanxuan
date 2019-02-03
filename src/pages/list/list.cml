@@ -8,7 +8,7 @@
         c-bind:customscroll="onScroll"
         height="{{-1}}"
       >
-        <c-refresh display="{{ topRefreshing }}" c-bind:refreshevent="onrefreshUp"></c-refresh>
+        <c-refresh display="{{ topRefreshing }}" c-bind:refresh="onrefreshUp"></c-refresh>
         <view>
           <view class="bannerImg">
             <image src="{{topImg}}" class="topImg"/>
@@ -51,7 +51,7 @@
                    display="{{ bottomRefreshing }}"
                    direction="bottom"
                    custom-ui="{{ true }}"
-                   c-bind:refreshevent="onrefreshDown"
+                   c-bind:refresh="onrefreshDown"
         >
           <view class="loading-text" style="{{ loadingTextStyle }}">
             <text>上拉刷新...</text>
