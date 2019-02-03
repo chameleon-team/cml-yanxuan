@@ -3,7 +3,6 @@
     <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}"
               autoplay="{{true}}">
       <carousel-item
-        class="carousel-carousel-item"
         c-for="{{bannerImgList}}"
         c-for-index="i"
         c-for-item="item"

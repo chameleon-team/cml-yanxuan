@@ -41,9 +41,7 @@
                 <text class="scroll-content-list-item-money">{{item.money}}</text>
                 <text class="scroll-content-list-item-tag">App特工</text>
               </view>
-
             </view>
-
           </view>
         </view>
         <view class="no-more-text" c-if="{{ page >= sumPage }}">
@@ -88,7 +86,7 @@
       onrefreshDown(e) {
         this.bottomRefreshing = e.detail.value;
         setTimeout(() => {
-          this.getData();
+          this.getListData();
           this.bottomRefreshing = false
         }, 500)
       },
@@ -112,7 +110,7 @@
         if (this.bottomRefreshing || this.page >= this.sumPage) return
         this.bottomRefreshing = true;
       },
-      getData() {
+      getListData() {
         cml.get({
           url: '/cml-yanxuan/mock/listImages.json'
         }).then(res => {
@@ -127,7 +125,7 @@
 
     created(res) {
       this.loadingTextStyle = 'color:#666;font-size:36cpx;margin:30cpx auto;';
-      this.getData();
+      this.getListData();
     }
   }
 
