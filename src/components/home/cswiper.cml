@@ -1,5 +1,5 @@
 <template>
-  <view class="carousel" c-bind:tab="forbinding">
+  <view class="carousel" c-bind:touchmove="forbinding">
     <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}"
               autoplay="{{true}}">
       <carousel-item
@@ -24,7 +24,8 @@
     }
     methods = {
       forbinding(e){
-        // e.stopPropagation();
+        console.log(e)
+        e._originEvent.stopPropagation && e._originEvent.stopPropagation()
       }
     }
     created() {
