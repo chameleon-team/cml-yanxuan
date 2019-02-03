@@ -12,18 +12,11 @@
 
 | web   |      微信小程序      |  native-weex |
 |----------|:-------------:|------:|
-
 | <img src="./preview/web-1.jpg" width="200px"/> |  <img src="./preview/wx-1.jpg" width="200px"/>| <img src="./preview/weex-1.jpg" width="200px"/> |
-
 | <img src="./preview/web-2.jpg" width="200px"/> |  <img src="./preview/wx-2.jpg" width="200px"/>| <img src="./preview/weex-2.jpg" width="200px"/> |
-
 | <img src="./preview/web-3.jpg" width="200px"/> |  <img src="./preview/wx-3.jpg" width="200px"/>| <img src="./preview/weex-3.jpg" width="200px"/> |
-
 | <img src="./preview/web-4.jpg" width="200px"/> |  <img src="./preview/wx-4.jpg" width="200px"/>| <img src="./preview/weex-4.jpg" width="200px"/> |
-
 | <img src="./preview/web-5.jpg" width="200px"/> |  <img src="./preview/wx-5.jpg" width="200px"/>| <img src="./preview/weex-5.jpg" width="200px"/> |
-
 | <img src="./preview/web-6.jpeg" width="200px"/> |  <img src="./preview/wx-6.jpg" width="200px"/>| <img src="./preview/weex-6.jpg" width="200px"/> |
-
 | <img src="./preview/web-7.jpg" width="200px"/> |  <img src="./preview/wx-7.jpg" width="200px"/>| <img src="./preview/weex-7.jpg" width="200px"/> |
 
