@@ -3,7 +3,7 @@
     <view class="content">
       <scroller
         bottom-offset="{{20}}"
-        height="{{-1}}"
+        height="{{scrollHeight}}"
       >
         <view>
           <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
@@ -75,7 +75,8 @@
       bannerImg: [],
       descriptionInfo: [],
       money: 0,
-      appTag: ''
+      appTag: '',
+      scrollHeight: -1
     }
     methods = {
       goto() {
@@ -101,6 +102,16 @@
           this.descriptionInfo = description;
           this.money = money;
           this.appTag = tag;
+        }
+      })
+    }
+
+    mounted() {
+      cml.getSystemInfo().then((info) => {
+        if (info.env == 'weex') {
+          this.scrollHeight = Number(info.viewportHeight) - 80 - 88;
+        } else {
+          this.scrollHeight = Number(info.viewportHeight) - 80;
         }
       })
     }

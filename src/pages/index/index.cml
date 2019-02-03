@@ -65,7 +65,7 @@
   class Index {
     data = {
       title: "chameleon",
-      scrollHeight: 0,
+      scrollHeight: -1,
       animationData: {},
       num: 1
     }
