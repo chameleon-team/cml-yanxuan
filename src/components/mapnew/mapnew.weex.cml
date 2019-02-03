@@ -1,0 +1,43 @@
+<template>
+  <view class="map-container">
+    <origin-web ref="webview" style="width: 750px; height: 350px" :src="h5url"></origin-web>
+  </view>
+</template>
+
+<script>
+
+class Mapnew implements MapnewInterface {
+  props = {
+    name: {
+      default: '默认值'
+    }
+  }
+  data= {
+      h5url: "https://chameleon-team.github.io/cml-yanxuan/dist/web/cml-yanxuan.html#/cml/h5/map",
+      name: '默认'
+  }
+  mounted() {
+    this.$cmlEmit('onshow',{
+      value: this.name
+    })
+  }
+}
+
+export default new Mapnew();
+</script>
+
+<style scoped>
+  .map-container{
+    width: 750cpx;
+    height: 350cpx;
+  }
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+    }
+  }
+}
+</script>

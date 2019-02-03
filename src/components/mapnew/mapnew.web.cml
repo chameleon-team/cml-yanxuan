@@ -19,7 +19,7 @@
     v: '1.4.4'
   });
 
-  class Map implements MapInterface {
+  class Mapnew implements MapnewInterface {
     props = {
       name: {
         default: '默认值'
@@ -46,7 +46,7 @@
     }
   }
 
-  export default new Map();
+  export default new Mapnew();
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <view>
-    <map id="myMap"
+    <origin-map id="myMap"
          style="width: 100%;"
          scale="{{scale}}"
          longitude="{{longitude}}"
@@ -8,7 +8,7 @@
          markers="{{markers}}"
          showLocation="{{showLocation}}"
          polyline="{{polyline}}">
-    </map>
+    </origin-map>
   </view>
 </template>
 
