@@ -284,6 +284,7 @@
   .map {
     width: 750cpx;
     height: 350cpx;
+    overflow: hidden;
   }
 
 </style>
@@ -292,7 +293,7 @@
   {
     "base": {
       "usingComponents": {
-          "map": "/components/map/map"
+          "map": "/components/mapnew/mapnew"
       },
       "navigationBarTitleText": "详情页",
       "backgroundTextStyle": "dark",

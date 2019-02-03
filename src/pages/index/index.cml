@@ -65,7 +65,7 @@
   class Index {
     data = {
       title: "chameleon",
-      scrollHeight: 0,
+      scrollHeight: -1,
       animationData: {},
       num: 1
     }
@@ -114,7 +114,6 @@
   }
   .content-main {
     width: 3750cpx;
-    background: #9F8A60;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

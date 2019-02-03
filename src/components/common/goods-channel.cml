@@ -1,6 +1,6 @@
 <template>
   <view class="container border-bottom-1px">
-    <scroller class="scroller" scroll-direction="horizontal" width="{{-1}}">
+    <scroller class="scroller" scroll-direction="horizontal" width="{{-1}}" height="{{-1}}">
       <view class="wrapper">
         <view class="j-uline" ref="jcLine"></view>
         <text class="i-c c-act">推荐</text>

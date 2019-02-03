@@ -21,7 +21,7 @@ export default new Map();
 {
   "base": {
     "usingComponents": {
-        "map": "/components/map/map"
+        "map": "/components/mapnew/mapnew"
     }
   },
   "wx": {
