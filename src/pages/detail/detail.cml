@@ -2,11 +2,10 @@
   <page title="详情页">
     <view class="content">
       <scroller
-        scroll-direction="vertical"
         bottom-offset="{{20}}"
         height="{{-1}}"
       >
-        <view c-bind:tab="forbinding">
+        <view>
           <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
             <carousel-item
               class="carousel-carousel-item"
@@ -27,7 +26,6 @@
             c-for="{{descriptionInfo}}"
             c-for-index="i"
             c-for-item="item"
-            c-bind:tap="change"
             data-idx="{{i}}"
           >
             <view class="description-item-img">
@@ -89,14 +87,12 @@
         console.log('change');
       },
       forbinding(e){
-        e.stopPropagation();
+        // e.stopPropagation();
       }
     }
     created() {
-      cml.request({
-        url: '/cml-yanxuan/mock/detailInfo.json',
-        method: 'get',
-        resDataType: 'json'
+      cml.get({
+        url: '/cml-yanxuan/mock/detailInfo.json'
       }).then(res => {
 
         if (res.code == 0) {

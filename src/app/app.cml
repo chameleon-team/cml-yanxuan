@@ -30,6 +30,11 @@ export default new App();
       "navigationBarBackgroundColor": "#343434",
       "navigationBarTitleText": "仿网易严选",
       "navigationBarTextStyle": "white"
+    },
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
     }
   }
 }
