@@ -5,6 +5,7 @@
 
 - clone 当前项目
 - 在项目根目录执行`npm install`
+- 启动项目`cml dev`
 
 其中地图功能 `./map/components/map` 使用了多态组件
 
