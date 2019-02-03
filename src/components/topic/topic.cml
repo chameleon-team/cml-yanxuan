@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-topic">
     <topic-header title="{{'专题'}}"></topic-header>
       <view class="scroller-view-box">
         <!--<view  class="cell-button">-->
@@ -49,7 +49,7 @@
   export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper{
+  .wrapper-topic{
     background-color: #f4f4f4;
   }
 </style>

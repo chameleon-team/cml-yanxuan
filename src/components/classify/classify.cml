@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-classify">
     <classify-header></classify-header>
     <view class="wrapper-content">
       <view class="class-list" style="{{scrollerHeight}}cpx">

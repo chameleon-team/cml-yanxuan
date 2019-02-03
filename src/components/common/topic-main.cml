@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-topic-main">
     <view class="auther-box" c-bind:tap="godetail">
       <image class="auther-img" resize="cover" src="{{article.autherimg}}"></image>
       <text class="auther-name">{{article.auther}}</text>
@@ -62,7 +62,7 @@
   export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper {
+  .wrapper-topic-main {
     background-color: #fff;
     padding-top: 15cpx;
     padding-bottom: 15cpx;

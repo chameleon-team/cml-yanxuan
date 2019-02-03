@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-goods">
     <text class="tlt">猜你喜欢</text>
     <view class="gb-box">
       <view class="i-gd" c-for="{{goods}}" data-url='{{item.url}}' c-bind:tap="jumpWeb">
@@ -35,7 +35,7 @@
   export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper {
+  .wrapper-goods {
     background-color: #fff;
     padding-bottom: 10cpx;
     padding-top: 26cpx;

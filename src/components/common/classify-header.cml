@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper" >
+  <view class="wrapper-classify-header" >
     <text class="search iconfont">搜索商品，共8888款好物</text>
   </view>
 </template>
@@ -8,7 +8,7 @@
   export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper{
+  .wrapper-classify-header{
     width: 750cpx;
     height: 114cpx;
     padding-top: 30cpx;

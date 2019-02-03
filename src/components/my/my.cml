@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-my">
     <image ref="headerBg" class="header-bg" resize="cover" src="http://cdn.zwwill.com/yanxuan/imgs/bg5.png"></image>
     <scroller height="{{scrollerHeight}}">
       <view class="header">
@@ -79,9 +79,6 @@
       },
     }
 
-    created() {
-
-    }
     mounted() {
       cml.getSystemInfo().then((info)=>{
         this.scrollerHeight = Number(info.viewportHeight) - tabbarHeight
@@ -95,7 +92,7 @@
   .iconfont {
     font-family:iconfont;
   }
-  .wrapper{
+  .wrapper-my{
     background-color: #f4f4f4;
   }
   .fbs{
