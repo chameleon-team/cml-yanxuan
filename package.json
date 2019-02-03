@@ -12,8 +12,7 @@
     "chameleon-store": "0.0.3",
     "chameleon-ui-builtin": "0.0.7-alpha.1",
     "cml-ui": "0.0.7-alpha",
-    "vue-amap": "0.5.8",
-    "vue-echarts": "^4.0.1"
+    "vue-amap": "0.5.8"
   },
   "scripts": {
     "deploy": "sh deploy.sh weex && sh deploy.sh web"
