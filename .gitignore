@@ -13,7 +13,6 @@ target/*
 
 # ignore generated document
 doc/**/_book/*
-doc/dist/*
 
 # ignore dynamic generated document summary markdown
 doc/gitbook/SUMMARY.md
