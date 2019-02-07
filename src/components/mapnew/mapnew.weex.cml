@@ -25,22 +25,13 @@ class Mapnew implements MapnewInterface {
     },
 
     start (event) {
-      console.log('pagestart', event);
-      cml.showToast({
-        message: "开始了"
-      })
+
     },
     finish (event) {
-      console.log('pagefinish', event)
-      cml.showToast({
-        message: "finish"
-      })
+
     },
     error (event) {
-      console.log('error', event)
-      cml.showToast({
-        message: "error"
-      })
+
     }
   }
 
