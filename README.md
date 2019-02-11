@@ -1,6 +1,9 @@
 # cml-yanxuan
 仿网易严选demo
-
+# 安装 alpha 版本
+```bash
+npm i -g chameleon-tool@0.1.0-alpha.3
+```
 # 使用
 
 - clone 当前项目
