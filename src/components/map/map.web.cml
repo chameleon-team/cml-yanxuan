@@ -1,6 +1,6 @@
 <template>
-  <view c-bind:tab="forbinding">
-    <view class="amap-wrapper" c-bind:tab="forbinding">
+  <view c-bind:tap="forbinding">
+    <view class="amap-wrapper" c-bind:tap="forbinding">
       <origin-el-amap vid="amapDemo" :zoom="zoom" :center="center" class="amap-box">
         <origin-el-amap-marker vid="component-marker" :position="componentMarker.position"></origin-el-amap-marker>
       </origin-el-amap>
@@ -35,7 +35,7 @@
 
     methods = {
       forbinding(e){
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     }
 

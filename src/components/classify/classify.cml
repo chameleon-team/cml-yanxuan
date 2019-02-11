@@ -41,7 +41,7 @@
         });
       },
       forbinding(e){
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     }
 

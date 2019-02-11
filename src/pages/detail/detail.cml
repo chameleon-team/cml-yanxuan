@@ -6,7 +6,7 @@
         bottom-offset="{{20}}"
         height="{{-1}}"
       >
-        <view c-bind:tab="forbinding">
+        <view c-bind:tap="forbinding">
           <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
             <carousel-item
               c-for="{{bannerImg}}"
@@ -88,7 +88,7 @@
         console.log('change');
       },
       forbinding(e){
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     }
     created() {
