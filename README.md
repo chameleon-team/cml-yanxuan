@@ -13,7 +13,7 @@
 
 | web   |      微信小程序      |  native-weex | 百度小程序 | 支付宝小程序 |
 |:----------:|:-------------:|:------:|:------:|:------:|
-| <img src="./preview/web-1.jpg" width="200px"/> |  <img src="./preview/wx-1.jpg" width="200px"/>| <img src="./preview/weex-1.jpg" width="200px"/> | <img src="./preview/weex-1.jpg" width="200px"/> | <img src="./preview/baidu-1.png" width="200px"/> |<img src="./preview/alipay-1.png" width="200px"/> |
+| <img src="./preview/web-1.jpg" width="200px"/> |  <img src="./preview/wx-1.jpg" width="200px"/>| <img src="./preview/weex-1.jpg" width="200px"/>  | <img src="./preview/baidu-1.png" width="200px"/> |<img src="./preview/alipay-1.png" width="200px"/> |
 | <img src="./preview/web-2.jpg" width="200px"/> |  <img src="./preview/wx-2.jpg" width="200px"/>| <img src="./preview/weex-2.jpg" width="200px"/> |<img src="./preview/baidu-2.png" width="200px"/> |<img src="./preview/alipay-2.png" width="200px"/> |
 | <img src="./preview/web-3.jpg" width="200px"/> |  <img src="./preview/wx-3.jpg" width="200px"/>| <img src="./preview/weex-3.jpg" width="200px"/> |<img src="./preview/baidu-3.png" width="200px"/> |<img src="./preview/alipay-3.png" width="200px"/> |
 | <img src="./preview/web-4.jpg" width="200px"/> |  <img src="./preview/wx-4.jpg" width="200px"/>| <img src="./preview/weex-4.jpg" width="200px"/> |<img src="./preview/baidu-4.png" width="200px"/> |<img src="./preview/alipay-4.png" width="200px"/> |
