@@ -1,0 +1,8 @@
+<view class="carousel  cml-base cml-view" bindtab="_cmlEventProxy" data-eventtab="forbinding">
+  <swiper class="carousel-container  cml-base cml-carousel" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}" autoplay="{{true}}">
+    <swiper-item s-for="bannerImgList" s-for-index="i" s-for-item="item" data-idx="{{i}}" class=" cml-base cml-carousel-item">
+      <image src="{{item.imgUrl}}" class="Img  cml-base cml-image" />
+    </swiper-item>
+
+  </swiper>
+</view>
