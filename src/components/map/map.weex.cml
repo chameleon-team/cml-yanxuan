@@ -1,29 +1,51 @@
 <template>
   <view class="map-container">
-    <origin-web ref="webview" style="width: 750px; height: 350px" :src="h5url"></origin-web>
+    <origin-web ref="webview" style="width: 750px; height: 350px" :src="h5url" onpagestart="pagestart" onpagefinish="pagefinish" onerror="error"></origin-web>
   </view>
 </template>
 
 <script>
-
-class Map implements MapInterface {
-  props = {
-    name: {
-      default: '默认值'
+  import cml from "chameleon-api";
+  const webview = weex.requireModule('webview');
+  class Mapnew implements MapnewInterface {
+    props = {
+      name: {
+        default: '默认值'
+      }
     }
-  }
-  data= {
+
+    data= {
       h5url: "https://chameleon-team.github.io/cml-yanxuan/dist/web/cml-yanxuan.html#/cml/h5/map",
       name: '默认'
-  }
-  mounted() {
-    this.$cmlEmit('onshow',{
-      value: this.name
-    })
-  }
-}
+    }
 
-export default new Map();
+    methods = {
+      reload (event) {
+        webview.reload(this.$refs.webview)
+      },
+
+      start (event) {
+
+      },
+      finish (event) {
+
+      },
+      error (event) {
+
+      }
+    }
+
+    mounted() {
+      this.$cmlEmit('onshow',{
+        value: this.name
+      });
+      setTimeout(() => {
+        this.reload();
+      },1000);
+    }
+  }
+
+  export default new Mapnew();
 </script>
 
 <style scoped>
@@ -34,10 +56,10 @@ export default new Map();
 </style>
 
 <script cml-type="json">
-{
-  "base": {
+  {
+    "base": {
     "usingComponents": {
     }
   }
-}
+  }
 </script>
