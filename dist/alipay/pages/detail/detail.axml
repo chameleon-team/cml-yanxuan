@@ -1,7 +1,7 @@
 <cml-buildin-page title="详情页" class=" cml-base cml-page">
   <view class="content  cml-base cml-view">
     <cml-buildin-scroller scroll-direction="vertical" bottom-offset="{{20}}" height="{{-1}}" class=" cml-base cml-scroller">
-      <view onTab="_cmlEventProxy" data-eventtab="forbinding" class=" cml-base cml-view" onCmlPropsEventProxy="_cmlPropsEventProxy">
+      <view onTap="_cmlEventProxy" data-eventtap="forbinding" class=" cml-base cml-view" onCmlPropsEventProxy="_cmlPropsEventProxy">
         <view class="carousel-container  cml-base cml-view"><swiper class="carousel-container  cml-base cml-carousel" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
           <swiper-item a:for="{{bannerImg}}" a:for-index="i" a:for-item="item" a:key="i" onTap="_cmlEventProxy" data-eventtap="change" data-idx="{{i}}" class=" cml-base cml-carousel-item" onCmlPropsEventProxy="_cmlPropsEventProxy">
             <image src="{{item.imgUrl}}" class="Img  cml-base cml-image" />

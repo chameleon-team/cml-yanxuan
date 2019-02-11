@@ -31,7 +31,7 @@ var List = function () {
     };
     this.methods = {
       forbinding: function forbinding(e) {
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     };
   }

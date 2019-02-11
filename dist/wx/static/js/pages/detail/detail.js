@@ -44,7 +44,7 @@ var Detail = function () {
         console.log('change');
       },
       forbinding: function forbinding(e) {
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     };
   }

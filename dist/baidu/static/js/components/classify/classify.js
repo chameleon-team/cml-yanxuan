@@ -49,7 +49,7 @@ var Yanxuan = function () {
         });
       },
       forbinding: function forbinding(e) {
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     };
   }
