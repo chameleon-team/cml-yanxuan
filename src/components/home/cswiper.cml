@@ -23,7 +23,7 @@
     }
     methods = {
       forbinding(e){
-        e._originEvent.stopPropagation();
+        e.stopPropagation();
       }
     }
     created() {
