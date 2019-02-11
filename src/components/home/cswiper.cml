@@ -1,5 +1,5 @@
 <template>
-  <view class="carousel" c-bind:tab="forbinding">
+  <view class="carousel" c-bind:tap="forbinding">
     <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}"
               autoplay="{{true}}">
       <carousel-item
@@ -23,7 +23,7 @@
     }
     methods = {
       forbinding(e){
-        e.stopPropagation();
+        e._originEvent.stopPropagation();
       }
     }
     created() {
