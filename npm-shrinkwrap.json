@@ -15,9 +15,9 @@
       "integrity": "sha512-mojW8jCToPkJdX+RsepAe/ijqVC3PhACIulYd0Ap45Xh4iEB0HY/YRQtK9c//M/oqMxpzrUKXTwpNkHjSowQdQ==",
       "requires": {
         "chameleon-bridge": "0.1.0",
-        "child_process": "^1.0.2",
-        "fetch-detector": "^1.0.1",
-        "fetch-ie8": "^1.5.0"
+        "child_process": "1.0.2",
+        "fetch-detector": "1.0.1",
+        "fetch-ie8": "1.5.0"
       },
       "dependencies": {
         "chameleon-bridge": {
@@ -95,7 +95,7 @@
       "resolved": "https://registry.npmjs.org/uppercamelcase/-/uppercamelcase-1.1.0.tgz",
       "integrity": "sha1-Mk2YprOvx+iolT4QZBUJsOTiP5c=",
       "requires": {
-        "camelcase": "^1.2.1"
+        "camelcase": "1.2.1"
       }
     },
     "vue-amap": {
@@ -103,7 +103,7 @@
       "resolved": "https://registry.npmjs.org/vue-amap/-/vue-amap-0.5.8.tgz",
       "integrity": "sha512-VWU6M58jAY4K80QGi+2tYWxvAszd/MQiWkBEYdyu2ptBHAgsNfZz2zxR1mWL32V74Q2bFoZz4yfOycMrQywlUA==",
       "requires": {
-        "uppercamelcase": "^1.1.0"
+        "uppercamelcase": "1.1.0"
       }
     },
     "vuex": {

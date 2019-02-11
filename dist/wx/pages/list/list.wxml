@@ -1,7 +1,7 @@
 <cml-buildin-page title="列表" class=" cml-base cml-page">
   <view class="container  cml-base cml-view">
     <cml-buildin-scroller scroll-direction="{{scrollDirection}}" bottom-offset="{{bottomOffset}}" bindscrolltobottom="_cmlEventProxy" data-eventscrolltobottom="onBottom" bindcustomscroll="_cmlEventProxy" data-eventcustomscroll="onScroll" height="{{-1}}" class=" cml-base cml-scroller">
-      <c-refresh display="{{ topRefreshing }}" bindrefreshevent="_cmlEventProxy" data-eventrefreshevent="onrefreshUp" class=" cml-base cml-c-refresh"></c-refresh>
+      <c-refresh display="{{ topRefreshing }}" bindrefresh="_cmlEventProxy" data-eventrefresh="onrefreshUp" class=" cml-base cml-c-refresh"></c-refresh>
       <view class=" cml-base cml-view">
         <view class="bannerImg  cml-base cml-view">
           <image src="{{topImg}}" class="topImg  cml-base cml-image" />
@@ -27,15 +27,13 @@
               <text class="scroll-content-list-item-money  cml-base cml-text">{{item.money}}</text>
               <text class="scroll-content-list-item-tag  cml-base cml-text">App特工</text>
             </view>
-
           </view>
-
         </view>
       </view>
       <view class="no-more-text  cml-base cml-view" wx:if="{{ page >= sumPage }}">
         <text class=" cml-base cml-text">没有更多了...</text>
       </view>
-      <c-refresh wx:else display="{{ bottomRefreshing }}" direction="bottom" custom-ui="{{ true }}" bindrefreshevent="_cmlEventProxy" data-eventrefreshevent="onrefreshDown" class=" cml-base cml-c-refresh">
+      <c-refresh wx:else display="{{ bottomRefreshing }}" direction="bottom" custom-ui="{{ true }}" bindrefresh="_cmlEventProxy" data-eventrefresh="onrefreshDown" class=" cml-base cml-c-refresh">
         <view class="loading-text  cml-base cml-view" style="{{loadingTextStyle}}">
           <text class=" cml-base cml-text">上拉刷新...</text>
         </view>

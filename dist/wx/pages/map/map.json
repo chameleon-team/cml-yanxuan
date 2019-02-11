@@ -1,6 +1,6 @@
 {
     "usingComponents": {
-        "map": "./../../components/map/map"
+        "map": "./../../components/mapnew/mapnew"
     },
     "navigationBarTitleText": "地图页",
     "backgroundTextStyle": "dark",

@@ -1,4 +1,4 @@
-<view class="wrapper  cml-base cml-view">
+<view class="wrapper-my  cml-base cml-view">
   <image class="header-bg  cml-base cml-image  _cml_ref_lmc_" resize="cover" src="http://cdn.zwwill.com/yanxuan/imgs/bg5.png" id="headerBg"></image>
   <cml-buildin-scroller height="{{scrollerHeight}}" class=" cml-base cml-scroller">
     <view class="header  cml-base cml-view">

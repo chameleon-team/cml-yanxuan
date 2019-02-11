@@ -1,4 +1,4 @@
-<view class="wrapper  cml-base cml-view">
+<view class="wrapper-shop  cml-base cml-view">
   <shop-header title="{{'购物车'}}" rightbtn="{{rightbtn}}" class=" cml-base cml-shop-header"></shop-header>
   <view class="slogan  cml-base cml-view">
     <text class="i-slg iconfont  cml-base cml-text"> 30天无忧退换货</text>

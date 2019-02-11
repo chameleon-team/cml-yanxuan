@@ -1,4 +1,4 @@
-<view class="wrapper  cml-base cml-view">
+<view class="wrapper-topic-main  cml-base cml-view">
   <view class="auther-box  cml-base cml-view" bindtap="_cmlEventProxy" data-eventtap="godetail">
     <image class="auther-img  cml-base cml-image" resize="cover" src="{{article.autherimg}}"></image>
     <text class="auther-name  cml-base cml-text">{{article.auther}}</text>
