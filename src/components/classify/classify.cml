@@ -4,7 +4,7 @@
     <view class="wrapper-content">
       <view class="class-list" style="{{scrollerHeight}}cpx">
         <scroller height="{{scrollerHeight}}">
-          <view class="class-wrapper" c-bind:tap="forbinding">
+          <view class="class-wrapper">
             <text class="class-txt" c-for="{{classes}}">{{item}}</text>
           </view>
         </scroller>
