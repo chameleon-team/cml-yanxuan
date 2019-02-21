@@ -32,6 +32,10 @@
       cml.get({
         url: '/cml-yanxuan/mock/getHomeImgList.json'
       }).then(res => {
+        try{
+          res = JSON.parse(res)
+        }catch(e){}
+        
         if (res.code == 0) {
           const {bannerImgList} = res.data;
           this.bannerImgList = bannerImgList;

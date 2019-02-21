@@ -116,6 +116,10 @@
         cml.get({
           url: '/cml-yanxuan/mock/listImages.json'
         }).then(res => {
+          try{
+            res = JSON.parse(res)
+          }catch(e){}
+
           if (res.code == 0) {
             const {topImgUrl, list} = res.data;
             this.list = [...this.list, ...list];

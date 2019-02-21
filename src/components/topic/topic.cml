@@ -30,6 +30,10 @@
       cml.get({
         url:'/cml-yanxuan/mock/yanxuan.json'
       }).then(res=>{
+        try{
+          res = JSON.parse(res)
+        }catch(e){}
+        
         if(res.errno == 0) {
           let result = res.data.result;
           this.topics = result.topics;
