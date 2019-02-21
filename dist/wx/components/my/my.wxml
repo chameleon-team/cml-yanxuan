@@ -5,7 +5,7 @@
       <image class="i-photo  cml-base cml-image" resize="cover" src="{{headerImg}}"></image>
       <text class="i-name  cml-base cml-text">哈哈哈哈哈</text>
       <view class="b-tlt  cml-base cml-view">
-        <image class="i-tag tag-e  cml-base cml-image" resize="contain" src="http://yanxuan.nosdn.127.net/3dc6e876620bb84a5dac3deb6ecd4916.png"></image>
+        <image class="i-tag tag-e  cml-base cml-image" resize="contain" src="https://yanxuan.nosdn.127.net/3dc6e876620bb84a5dac3deb6ecd4916.png"></image>
         <text class="i-tag tag-v8 iconfont  cml-base cml-text"></text>
         <text class="txt-tag  cml-base cml-text">品质生活家</text>
       </view>
