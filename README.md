@@ -12,6 +12,8 @@ npm i -g chameleon-tool@0.1.0-alpha.3
 
 其中地图功能 `./map/components/map` 使用了多态组件
 
+> 百度开发者工具、支付宝开发者工具中需改成 “普通模式”
+
 # 页面如下
 
 | web   |      微信小程序      |  native-weex | 百度小程序 | 支付宝小程序 |
