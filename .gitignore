@@ -19,4 +19,5 @@ doc/gitbook/SUMMARY.md
 
 # test coverage
 coverage/*
+dist/
 
