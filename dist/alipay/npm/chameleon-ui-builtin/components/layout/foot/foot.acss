@@ -1,0 +1,10 @@
+.cml-0604a42f.c-foot {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background-color: #b3c0d1;
+  color: #333;
+  line-height: 60rpx;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}

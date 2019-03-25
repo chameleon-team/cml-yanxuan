@@ -4,8 +4,8 @@
   </view>
 </template>
 <script>
-  class Yanxuan { }
-  export default new Yanxuan();
+  class ClassifyHeader { }
+  export default new ClassifyHeader();
 </script>
 <style scoped>
   .wrapper{

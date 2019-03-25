@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import store from '../../store'
-  class Index {
+  import store from '../../../../../store'
+  class Tab {
     data = {
       animationData: {},
       tabs: [],
@@ -26,10 +26,10 @@
       }
     }
     created() {
-      this.tabs = store.state.tabs;
+      this.tabs = store.state.yanxuan.tabs;
     }
   }
-  export default new Index();
+  export default new Tab();
 </script>
 
 <script cml-type="json">

@@ -1,3 +1,4 @@
+
 <template>
   <view class="wrapper">
     <text class="tlt">猜你喜欢</text>
@@ -16,7 +17,7 @@
 <script>
   import cml from 'chameleon-api';
 
-  class Yanxuan {
+  class ShopList {
     props = {
       goods: {
         type: Array,
@@ -26,13 +27,12 @@
 
     methods = {
       jumpWeb(e) {
-        cml.open('https://chameleon-team.github.io/doc/');
       }
     }
 
   }
 
-  export default new Yanxuan();
+  export default new ShopList();
 </script>
 <style scoped>
   .wrapper {

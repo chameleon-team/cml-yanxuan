@@ -28,7 +28,7 @@
 <script>
   import cml from "chameleon-api";
 
-  class Yanxuan {
+  class TopicMain {
     props = {
       article: {
         type: Object,
@@ -59,7 +59,7 @@
 
   }
 
-  export default new Yanxuan();
+  export default new TopicMain();
 </script>
 <style scoped>
   .wrapper {

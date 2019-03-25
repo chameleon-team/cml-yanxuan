@@ -11,7 +11,7 @@
       </view>
 
       <view class="main-list" style="{{scrollerHeight}}cpx">
-        <image class="ad-img" resize="cover" src="https://yanxuan.nosdn.127.net/3ebd7addcc0d101d116052a57cec2f16.png"></image>
+        <image class="ad-img" resize="cover" src="https://cmljs.org/cml-demo/src/assets/images/yanxuan/3ebd7addcc0d101d116052a57cec2f16.png"></image>
         <text class="sub-tlt"> --- 推荐区分类 --- </text>
         <view class="sub-box">
           <view class="sub-i" c-for="{{subclasses}}" c-bind:tap="godetail">
@@ -26,9 +26,10 @@
 </template>
 <script>
   import cml from "chameleon-api";
+  import yanxuanData from '../../assets/json/yanxuan.json'
   const headerHeight = 114;
   const tabbarHeight = 90;
-  class Yanxuan   {
+  class Classify   {
     data = {
       classes: [],
       subclasses : [],
@@ -46,22 +47,9 @@
     }
 
     created() {
-      cml.get({
-        url:'/cml-yanxuan/mock/yanxuan.json'
-      }).then(res=>{
-        try{
-          res = JSON.parse(res)
-        }catch(e){}
-        
-        if(res.errno == 0) {
-          let result = res.data.result;
-          this.classes = result.classes;
-          this.subclasses = result.subclasses;
-        } else {
-        }
-      }).catch(e=>{
-
-      })
+      let result = yanxuanData.data.result;
+      this.classes = result.classes;
+      this.subclasses = result.subclasses;
     }
 
     mounted() {
@@ -71,7 +59,7 @@
     }
   }
 
-  export default new Yanxuan();
+  export default new Classify();
 </script>
 <style scoped>
 

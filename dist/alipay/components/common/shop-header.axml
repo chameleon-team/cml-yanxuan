@@ -1,0 +1,9 @@
+<view class="wrapper border-bottom-1px  cml-base cml-view cml-7f8a108e">
+  <view class="left  cml-base cml-view cml-7f8a108e">
+    <text class="leftTxt  cml-base cml-text cml-7f8a108e" a:if="{{leftbtn}}">{{leftbtn.name}}</text>
+  </view>
+  <text class="tlt  cml-base cml-text cml-7f8a108e">{{title}}</text>
+  <view class="right  cml-base cml-view cml-7f8a108e">
+    <text class="rightTxt  cml-base cml-text cml-7f8a108e" a:if="{{rightbtn}}">{{rightbtn.name}}</text>
+  </view>
+</view>

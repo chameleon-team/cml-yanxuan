@@ -21,12 +21,12 @@
   </view>
 </template>
 <script>
-  class Yanxuan {
+  class GoodsChannel {
 
 
   }
 
-  export default new Yanxuan();
+  export default new GoodsChannel();
 </script>
 <style scoped>
   .container {

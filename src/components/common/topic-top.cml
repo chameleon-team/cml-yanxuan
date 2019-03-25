@@ -1,3 +1,4 @@
+
 <template>
   <view class="wrapper">
     <view class="cont">
@@ -17,7 +18,7 @@
   </view>
 </template>
 <script>
-  class Yanxuan {
+  class TopicTop {
     props = {
       topics: {
         type: Array,
@@ -26,7 +27,7 @@
     }
   }
 
-  export default new Yanxuan();
+  export default new TopicTop();
 </script>
 <style scoped>
 

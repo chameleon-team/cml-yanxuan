@@ -8,6 +8,7 @@
         c-for-index="i"
         c-for-item="item"
         data-idx="{{i}}"
+        c-key="{{i}}"
       >
         <image src="{{item.imgUrl}}" class="Img"/>
       </carousel-item>
@@ -18,7 +19,8 @@
 
 <script>
   import cml from 'chameleon-api';
-  class List {
+  import homeData from '../../assets/json/getHomeImgList.json';
+  class Cswiper {
     data = {
       bannerImgList: []
     }
@@ -29,24 +31,12 @@
       }
     }
     created() {
-      cml.get({
-        url: '/cml-yanxuan/mock/getHomeImgList.json'
-      }).then(res => {
-        try{
-          res = JSON.parse(res)
-        }catch(e){}
-        
-        if (res.code == 0) {
-          const {bannerImgList} = res.data;
-          this.bannerImgList = bannerImgList;
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+      const {bannerImgList} = homeData.data;
+      this.bannerImgList = bannerImgList;
     }
   }
 
-  export default new List();
+  export default new Cswiper();
 </script>
 <style scoped>
   .carousel-container {
