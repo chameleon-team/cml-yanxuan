@@ -1,6 +1,8 @@
 # cml-yanxuan
 仿网易严选demo
 
+包含更多端 [百度、支付宝小程序](https://github.com/chameleon-team/cml-yanxuan/tree/baidu-alipay) 分支
+
 # 使用
 
 - clone 当前项目
