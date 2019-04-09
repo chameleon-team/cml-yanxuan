@@ -69,19 +69,19 @@ page, .cml-view {
     min-width: 0;
 }
 
-.border-1px,
-.border-top-1px,
-.border-right-1px,
-.border-bottom-1px,
-.border-left-1px {
+.cml-border-1px,
+.cml-border-top-1px,
+.cml-border-right-1px,
+.cml-border-bottom-1px,
+.cml-border-left-1px {
   position: relative;
 }
 
-.border-top-1px:before,
-.border-left-1px:before,
-.border-1px:after,
-.border-right-1px:after,
-.border-bottom-1px:after {
+.cml-border-top-1px:before,
+.cml-border-left-1px:before,
+.cml-border-1px:after,
+.cml-border-right-1px:after,
+.cml-border-bottom-1px:after {
   content: "";
   display: block;
   position: absolute;
@@ -91,7 +91,7 @@ page, .cml-view {
   z-index: 2;
 }
 
-.border-1px:after {
+.cml-border-1px:after {
     border: 1rpx solid #ccc;
     left: 0;
     top: 0;
@@ -101,14 +101,14 @@ page, .cml-view {
     transform-origin: 0 0;
 }
 
-.border-top-1px:before {
+.cml-border-top-1px:before {
   border-top: 1rpx solid #ccc;
   left: 0;
   top: 0;
   width: 100%;
 }
 
-.border-right-1px:after {
+.cml-border-right-1px:after {
   border-right: 1rpx solid #ccc;
   top: 0;
   right: 0;
@@ -117,7 +117,7 @@ page, .cml-view {
   transform-origin: right 0;
 }
 
-.border-bottom-1px:after {
+.cml-border-bottom-1px:after {
   border-bottom: 1rpx solid #ccc;
   left: 0;
   bottom: 0;
@@ -126,24 +126,26 @@ page, .cml-view {
   transform-origin: 0 bottom;
 }
 
-.border-left-1px:before {
+.cml-border-left-1px:before {
   border-left: 1rpx solid #ccc;
   top: 0;
   left: 0;
   height: 100%;
 }
 
-.border-none:before, .border-none:after {
+.cml-border-none:before, .cml-border-none:after {
     display: none;
+}
+
+.cml-c-button {
+  -webkit-align-self: stretch;
+          align-self: stretch;
 }
 
 .cml-btn {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
   padding: 0 30rpx;
   height: 88rpx;
   line-height: 88rpx;
@@ -154,8 +156,6 @@ page, .cml-view {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  -webkit-align-self: stretch;
-          align-self: stretch;
   border-radius: 4rpx;
   font-size: 32rpx;
   color: #fff;
@@ -241,6 +241,16 @@ page, .cml-view {
 .cml-btn-small {
   width: 157rpx;
   height: 44rpx;
+}
+
+.cml-btn-stretch {
+  -webkit-align-self: stretch;
+          align-self: stretch;
+}
+
+.cml-btn-auto {
+  -webkit-align-self: flex-start;
+          align-self: flex-start;
 }
 
 .btn-text {

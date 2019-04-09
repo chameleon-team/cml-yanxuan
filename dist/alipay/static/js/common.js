@@ -159,22 +159,33 @@ var commonMixins = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/l
 var _ = module.exports = commonMixins.deepClone(commonMixins);
 
 commonMixins.merge(_.mixins.methods, _defineProperty({}, _.eventEmitName, function (eventKey, detail) {
-  var modelkey = this.props['data-modelkey'];
-  var eventKeyProps = this.props["data-event" + eventKey];
+  var _this = this;
+
+  var dataset = {};
+  var propKeys = Object.keys(this.props || {});
+  (propKeys || []).forEach(function (propKey) {
+    if (propKey.indexOf('data-') === 0) {
+      var dataKey = propKey.slice(5); // 得到dataset中应该对应的key值
+      if (dataKey) {
+        dataset[dataKey] = _this.props[propKey];
+      }
+    }
+  });
+  // let modelkey = this.props['data-modelkey'];
+  // let eventKeyProps = this.props["data-event" + eventKey];
   function titleLize(word) {
+    // 将开头字母转化为大写
     return word.replace(/^\w/, function (match) {
       return match.toUpperCase();
     });
   }
   var callback = this.props['on' + titleLize(eventKey)];
   if (callback && _.isType(callback, 'Function')) {
-    var _dataset;
-
     callback({
       type: eventKey,
       detail: detail,
       currentTarget: {
-        dataset: (_dataset = {}, _defineProperty(_dataset, 'event' + eventKey, eventKeyProps), _defineProperty(_dataset, 'modelkey', modelkey), _dataset)
+        dataset: dataset
       }
     });
   }
@@ -394,6 +405,197 @@ function getNewEvent(e) {
   newEvent._originEvent = e;
   return newEvent;
 }
+
+/***/ }),
+
+/***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/process/browser.js":
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
 
 /***/ }),
 
@@ -1201,6 +1403,32 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./node_modules/chameleon-api/src/interfaces/cpx2px/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = cpx2px;
+
+var _getWidth = __webpack_require__("./node_modules/chameleon-api/src/interfaces/px2cpx/getWidth.interface");
+
+var _getWidth2 = _interopRequireDefault(_getWidth);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function cpx2px(cpx) {
+  if (typeof cpx !== 'number') {
+    console.error('Parameter must be a number');
+    return;
+  }
+  var viewportWidth = _getWidth2.default.getWidth();
+  var px = +(viewportWidth / 750 * cpx).toFixed(3);
+  return px;
+}
+
+/***/ }),
+
 /***/ "./node_modules/chameleon-api/src/interfaces/getSystemInfo/index.interface":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1451,7 +1679,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -1629,6 +1857,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _utils = __webpack_require__("./node_modules/chameleon-api/src/lib/utils.js");
 
 var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
@@ -1865,7 +2095,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -1959,15 +2189,7 @@ var Method = function () {
       var path = opt.path,
           query = opt.query;
 
-
-      if (query && query != '&') {
-        if (path.indexOf('?') === -1) {
-          query = '?' + query;
-        }
-
-        path = path + query;
-      }
-
+      path = (0, _utils.buildQueryStringUrl)((0, _utils.queryParse)(query), path);
       my.navigateTo({
         url: path
       });
@@ -2001,7 +2223,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function navigateTo(opt) {
   // 转换为字符串通过多态不支持object，需改
-  var query = (0, _utils.queryStringify)(opt.query) || '';
+  var query = (0, _utils.buildQueryStringUrl)(opt.query) || '';
   var path = opt.path || '';
   var url = opt.url || '';
 
@@ -2253,7 +2475,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -2391,7 +2613,7 @@ function px2cpx(px) {
 /***/ "./node_modules/chameleon-api/src/lib/utils.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-Object.defineProperty(exports, "__esModule", {
+/* WEBPACK VAR INJECTION */(function(process) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.isFn = isFn;
@@ -2404,6 +2626,7 @@ exports.isEmpty = isEmpty;
 exports.noop = noop;
 exports.parseQuery = parseQuery;
 exports.queryStringify = queryStringify;
+exports.buildQueryStringUrl = buildQueryStringUrl;
 exports.queryParse = queryParse;
 exports.isNeedApiPrefix = isNeedApiPrefix;
 exports.addApiPrefix = addApiPrefix;
@@ -2473,16 +2696,27 @@ function parseQuery(obj) {
 }
 
 function queryStringify(obj) {
-  var str = '&';
+  var strArr = [];
   var keys = null;
   if (obj && Object.keys(obj).length > 0) {
     keys = Object.keys(obj);
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
-      str += key + '=' + encodeURIComponent(obj[key]) + '&';
+      strArr.push(key + '=' + encodeURIComponent(obj[key]));
     }
   }
-  return str;
+  return strArr.join('&');
+}
+
+function buildQueryStringUrl(params) {
+  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  if (!url) return queryStringify(params);
+  var retUrl = url;
+  if (queryStringify(params)) {
+    retUrl = url.indexOf('?') > -1 ? url + '&' + queryStringify(params) : url + '?' + queryStringify(params);
+  }
+  return retUrl;
 }
 
 function queryParse() {
@@ -2504,15 +2738,15 @@ function isNeedApiPrefix(url) {
 }
 
 function addApiPrefix(url, domainkey) {
-  var domainMap = {"apiPrefix":"http://172.24.36.108:8000"};
+  var domainMap = process.env.domainMap;
   // 新版cli
   if (domainMap) {
-    var prefix = domainMap[domainkey] || "http://172.24.36.108:8000";
+    var prefix = domainMap[domainkey] || process.env.devApiPrefix;
     return prefix + url;
   } else {
     // 老版本配置apiPrefix
     if (true) {
-      return "http://172.24.36.108:8000" + url;
+      return "http://172.24.36.57:8000" + url;
     }
   }
 }
@@ -2546,26 +2780,53 @@ function getOpenObj(url) {
   var webUrlWithoutQuery = url.split('?')[0];
   var queryObj = getQueryParamsFromUrl(url);
 
-  var _queryObj$weixin_appi = queryObj.weixin_appid,
+  var _queryObj$path = queryObj.path,
+      path = _queryObj$path === undefined ? '' : _queryObj$path,
+      _queryObj$envVersion = queryObj.envVersion,
+      envVersion = _queryObj$envVersion === undefined ? '' : _queryObj$envVersion,
+      _queryObj$weixin_appi = queryObj.weixin_appid,
       weixin_appid = _queryObj$weixin_appi === undefined ? '' : _queryObj$weixin_appi,
       _queryObj$weixin_path = queryObj.weixin_path,
       weixin_path = _queryObj$weixin_path === undefined ? '' : _queryObj$weixin_path,
       _queryObj$weixin_envV = queryObj.weixin_envVersion,
       weixin_envVersion = _queryObj$weixin_envV === undefined ? '' : _queryObj$weixin_envV,
+      _queryObj$baidu_appid = queryObj.baidu_appid,
+      baidu_appid = _queryObj$baidu_appid === undefined ? '' : _queryObj$baidu_appid,
+      _queryObj$baidu_path = queryObj.baidu_path,
+      baidu_path = _queryObj$baidu_path === undefined ? '' : _queryObj$baidu_path,
+      _queryObj$baidu_envVe = queryObj.baidu_envVersion,
+      baidu_envVersion = _queryObj$baidu_envVe === undefined ? '' : _queryObj$baidu_envVe,
+      _queryObj$alipay_appi = queryObj.alipay_appid,
+      alipay_appid = _queryObj$alipay_appi === undefined ? '' : _queryObj$alipay_appi,
+      _queryObj$alipay_path = queryObj.alipay_path,
+      alipay_path = _queryObj$alipay_path === undefined ? '' : _queryObj$alipay_path,
+      _queryObj$alipay_envV = queryObj.alipay_envVersion,
+      alipay_envVersion = _queryObj$alipay_envV === undefined ? '' : _queryObj$alipay_envV,
       _queryObj$weex_path = queryObj.weex_path,
       weex_path = _queryObj$weex_path === undefined ? '' : _queryObj$weex_path,
-      _queryObj$wx_addr = queryObj.wx_addr,
-      wx_addr = _queryObj$wx_addr === undefined ? '' : _queryObj$wx_addr,
-      extraData = _objectWithoutProperties(queryObj, ['weixin_appid', 'weixin_path', 'weixin_envVersion', 'weex_path', 'wx_addr']);
+      _queryObj$cml_addr = queryObj.cml_addr,
+      cml_addr = _queryObj$cml_addr === undefined ? '' : _queryObj$cml_addr,
+      extraData = _objectWithoutProperties(queryObj, ['path', 'envVersion', 'weixin_appid', 'weixin_path', 'weixin_envVersion', 'baidu_appid', 'baidu_path', 'baidu_envVersion', 'alipay_appid', 'alipay_path', 'alipay_envVersion', 'weex_path', 'cml_addr']);
 
   var objTreated = {
-    weex: wx_addr ? webUrlWithoutQuery + '?weex_path=' + weex_path + queryStringify(extraData) + '&wx_addr=' + wx_addr : null,
+    weex: cml_addr ? webUrlWithoutQuery + '?weex_path=' + weex_path + queryStringify(extraData) + '&cml_addr=' + cml_addr : null,
     web: webUrlWithoutQuery + '?' + queryStringify(extraData),
     wx: {
       appId: weixin_appid,
-      path: weixin_path,
+      path: weixin_path || path,
       extraData: extraData,
-      envVersion: weixin_envVersion
+      envVersion: weixin_envVersion || envVersion
+    },
+    alipay: {
+      appId: alipay_appid,
+      path: alipay_path || path,
+      extraData: extraData,
+      envVersion: alipay_envVersion || envVersion
+    },
+    baidu: {
+      appKey: baidu_appid,
+      path: baidu_path || path,
+      extraData: extraData
     }
   };
   return objTreated;
@@ -2594,7 +2855,7 @@ function getRefObj(ref, context) {
     if (false) {
       refObj.weexRef = context.$refs && context.$refs[ref];
     } else if (false) {
-      refObj.webDom = context.$refs[ref] && context.$refs[ref].$el || context.$refs[ref];
+      refObj.webDom = context.$refs[ref] && context.$refs[ref][0] || context.$refs[ref] && context.$refs[ref].$el || context.$refs[ref];
     }
     return refObj;
   }
@@ -2670,6 +2931,7 @@ var checkValue = exports.checkValue = function checkValue(check, targetMap) {
   }
   return true;
 };
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -2711,6 +2973,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+__webpack_require__("./node_modules/chameleon-runtime/src/interfaces/bootstrap/shim.js");
+
 var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2728,6 +2992,10 @@ var __CHECK__DEFINES__ = {
       "bootstrap": {
         "input": ["CMLObject"],
         "output": "Undefined"
+      },
+      "getInfo": {
+        "input": [],
+        "output": "CMLObject"
       }
     }
   },
@@ -2940,7 +3208,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -3035,6 +3303,11 @@ var Method = function () {
     key: "bootstrap",
     value: function bootstrap(options) {//  小程序端启动入口为src/app/app.cml
     }
+  }, {
+    key: "getInfo",
+    value: function getInfo() {
+      return {};
+    }
   }]);
 
   return Method;
@@ -3069,6 +3342,39 @@ exports.default = {
   getInfo: _index2.default.getInfo
 
 };
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-runtime/src/interfaces/bootstrap/shim.js":
+/***/ (function(module, exports) {
+
+/**
+ * Promise.finally、Promise.done 垫片
+ */
+if (typeof Promise.prototype.finally !== 'function') {
+  Promise.prototype.finally = function (onFinally) {
+    var P = this.constructor;
+    return this.then(function (value) {
+      return P.resolve(onFinally()).then(function () {
+        return value;
+      });
+    }, function (reason) {
+      return P.resolve(onFinally()).then(function () {
+        throw reason;
+      });
+    });
+  };
+}
+
+if (typeof Promise.prototype.done === 'undefined') {
+  Promise.prototype.done = function (onFulfilled, onRejected) {
+    this.then(onFulfilled, onRejected).catch(function (error) {
+      setTimeout(function () {
+        throw error;
+      }, 0);
+    });
+  };
+}
 
 /***/ }),
 
@@ -3312,7 +3618,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -3677,7 +3983,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -4042,7 +4348,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {
@@ -4284,6 +4590,7 @@ var App = exports.App = function (_BaseCtor) {
     _this.cmlType = 'alipay';
 
     var runtimeWidget = new _RuntimeWidget2.default({
+      polyHooks: _lifecycle2.default.get('alipay.app.polyHooks'),
       platform: _this.cmlType,
       options: _this.options
     });
@@ -4298,7 +4605,9 @@ var App = exports.App = function (_BaseCtor) {
       },
       needResolveAttrs: ['methods'],
       hooks: _lifecycle2.default.get('alipay.app.hooks'),
-      hooksMap: _lifecycle2.default.get('alipay.app.hooksMap')
+      hooksMap: _lifecycle2.default.get('alipay.app.hooksMap'),
+      polyHooks: _lifecycle2.default.get('alipay.app.polyHooks'),
+      usedHooks: _lifecycle2.default.get('alipay.app.usedHooks')
     });
 
     __CML__GLOBAL.App(_this.options);
@@ -4355,6 +4664,7 @@ var Component = exports.Component = function (_BaseCtor) {
     _this.cmlType = 'alipay';
 
     var runtimeWidget = new _RuntimeWidget2.default({
+      polyHooks: _lifecycle2.default.get('alipay.component.polyHooks'),
       platform: _this.cmlType,
       options: _this.options
     });
@@ -4386,6 +4696,8 @@ var Component = exports.Component = function (_BaseCtor) {
       },
       hooks: _lifecycle2.default.get('alipay.component.hooks'),
       hooksMap: _lifecycle2.default.get('alipay.component.hooksMap'),
+      polyHooks: _lifecycle2.default.get('alipay.component.polyHooks'),
+      usedHooks: _lifecycle2.default.get('alipay.component.usedHooks'),
       needPropsHandler: true,
       needTransformProperties: false
     });
@@ -4478,6 +4790,7 @@ var Page = exports.Page = function (_BaseCtor) {
     _this.cmlType = 'alipay';
 
     var runtimeWidget = new _RuntimeWidget2.default({
+      polyHooks: _lifecycle2.default.get('alipay.page.polyHooks'),
       platform: _this.cmlType,
       options: _this.options
     });
@@ -4500,7 +4813,9 @@ var Page = exports.Page = function (_BaseCtor) {
       },
       needResolveAttrs: ['methods'],
       hooks: _lifecycle2.default.get('alipay.page.hooks'),
-      hooksMap: _lifecycle2.default.get('alipay.page.hooksMap')
+      hooksMap: _lifecycle2.default.get('alipay.page.hooksMap'),
+      polyHooks: _lifecycle2.default.get('alipay.page.polyHooks'),
+      usedHooks: _lifecycle2.default.get('alipay.page.usedHooks')
     });
 
     __CML__GLOBAL.Page(_this.options);
@@ -4534,7 +4849,7 @@ var BaseCtor = function () {
     // 拷贝原型链上属性
     (0, _proto.copyProtoProperty)(options);
 
-    this.options = Object.assign({}, options);
+    this.options = _extends({}, options);
     this.originalOptions = options;
   }
 
@@ -4586,6 +4901,8 @@ var BaseOptionsTransformer = function () {
     this.builtinMixins = config.builtinMixins;
     this.hooks = config.hooks;
     this.hooksMap = config.hooksMap;
+    this.polyHooks = config.polyHooks;
+    this.usedHooks = config.usedHooks;
     this.platform = '';
 
     if (true) {
@@ -4629,10 +4946,6 @@ var _resolve = __webpack_require__("./node_modules/chameleon-runtime/src/platfor
 
 var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
 
-var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/lifecycle.js");
-
-var _lifecycle2 = _interopRequireDefault(_lifecycle);
-
 var _KEY = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/KEY.js");
 
 var _KEY2 = _interopRequireDefault(_KEY);
@@ -4666,15 +4979,14 @@ var MiniOptTransformer = function (_BaseOptionsTransform) {
     key: 'init',
     value: function init() {
       this.propsName = this.platform ? _KEY2.default.get(this.platform + '.props') : '';
-      this.whitelist = this.platform ? _lifecycle2.default.get(this.platform + '.' + this.type + '.whitelist') : [];
 
       this.needPropsHandler && this.initProps(this.options);
       // 生命周期映射
-      this.transferLifecycle(this.options);
+      (0, _util.transferLifecycle)(this.options, this.hooksMap);
       this.handleMixins(this.options);
 
-      // 各端差异化生命周期
-      this.extendWhitelistHooks();
+      // 扩展各端多态生命周期
+      this.extendPolyHooks();
 
       // init 顺序很重要
       // this.mergeInjectedMixins()
@@ -4791,65 +5103,18 @@ var MiniOptTransformer = function (_BaseOptionsTransform) {
         // todo type 校验
       }
     }
-
-    /**
-     * 生命周期映射
-     * @param  {Object} vmObj vm对象
-     * @param  {Object} map 映射表
-     * @param  {Object} lifecycle 生命周期序列 确保顺序遍历
-     * @return {Object}     修改后值
-     */
-
-  }, {
-    key: 'transferLifecycle',
-    value: function transferLifecycle(vmObj) {
-      var _this3 = this;
-
-      // 将生命周期 键名 处理成 ['_' + key]
-      var cmlHooks = _lifecycle2.default.get('cml.hooks').map(function (key) {
-        return '_' + key;
-      });
-      var _map = {};
-
-      Object.keys(this.hooksMap).forEach(function (key) {
-        _map['_' + key] = _this3.hooksMap[key];
-
-        if (vmObj.hasOwnProperty(key)) {
-          vmObj['_' + key] = vmObj[key];
-          delete vmObj[key];
-        }
-      });
-
-      cmlHooks.forEach(function (key) {
-        var mapVal = _map[key];
-        var objVal = vmObj[key];
-
-        if (vmObj.hasOwnProperty(key)) {
-          if (vmObj.hasOwnProperty(mapVal)) {
-            if ((0, _type.type)(vmObj[mapVal]) !== 'Array') {
-              vmObj[mapVal] = [vmObj[mapVal], objVal];
-            } else {
-              vmObj[mapVal].push(objVal);
-            }
-          } else {
-            vmObj[mapVal] = [objVal];
-          }
-          delete vmObj[key];
-        }
-      });
-    }
   }, {
     key: 'handleMixins',
-    value: function handleMixins(vmObj) {
-      var _this4 = this;
+    value: function handleMixins(VMObj) {
+      var _this3 = this;
 
-      if (!vmObj.mixins) return;
+      if (!VMObj.mixins) return;
 
-      var mixins = vmObj.mixins;
+      var mixins = VMObj.mixins;
 
       mixins.forEach(function (mix) {
         // 生命周期映射
-        _this4.transferLifecycle(mix);
+        (0, _util.transferLifecycle)(mix, _this3.hooksMap);
       });
     }
 
@@ -4858,23 +5123,22 @@ var MiniOptTransformer = function (_BaseOptionsTransform) {
      */
 
   }, {
-    key: 'extendWhitelistHooks',
-    value: function extendWhitelistHooks() {
-      var _this5 = this;
+    key: 'extendPolyHooks',
+    value: function extendPolyHooks() {
+      var _this4 = this;
 
-      var allHooks = this.hooks.concat(this.whitelist);
       var methods = this.options.methods;
 
       if (!methods) {
         return;
       }
 
-      allHooks.forEach(function (hook) {
+      this.polyHooks.forEach(function (hook) {
         if ((0, _type.type)(methods[hook]) === 'Function') {
-          if (_this5.options[hook]) {
-            _this5.options[hook].push(methods[hook]);
+          if ((0, _type.type)(_this4.options[hook]) === 'Array') {
+            _this4.options[hook].push(methods[hook]);
           } else {
-            _this5.options[hook] = [methods[hook]];
+            _this4.options[hook] = [methods[hook]];
           }
           delete methods[hook];
         }
@@ -4957,37 +5221,48 @@ var MiniOptTransformer = function (_BaseOptionsTransform) {
     key: 'transformHooks',
     value: function transformHooks() {
       if (!this.hooks || !this.hooks.length) return;
-
       var self = this;
       this.hooks.forEach(function (key) {
         var hooksArr = self.options[key];
         hooksArr && (self.options[key] = function () {
-          var _this6 = this;
+          var result = void 0;
+          var asyncQuene = [];
+
+          // 多态生命周期需要统一回调参数
+          // if (self.polyHooks.indexOf(key) > -1) {
+          //   let res = args[0]
+          //   if (type(res) !== 'Object') {
+          //     res = {
+          //       'detail': args[0]
+          //     }
+          //   }
+          //   args = [res]
+          // }
 
           for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
           }
 
-          var result = void 0;
-          var asyncQuene = [];
-          for (var i = 0; i < hooksArr.length; i++) {
-            if ((0, _type.type)(hooksArr[i]) === 'Function') {
-              // page 的 onload 生命周期，获取页面参数处理下
-              if (key === 'onload') {}
+          if ((0, _type.type)(hooksArr) === 'Function') {
+            result = hooksArr.apply(this, args);
+          } else if ((0, _type.type)(hooksArr) === 'Array') {
+            for (var i = 0; i < hooksArr.length; i++) {
+              if ((0, _type.type)(hooksArr[i]) === 'Function') {
 
-              result = hooksArr[i].apply(this, args);
+                result = hooksArr[i].apply(this, args);
 
-              if (result && result.enableAsync) {
-                asyncQuene = hooksArr.slice(i + 1);
-                break;
+                // if (result && result.enableAsync) {
+                //   asyncQuene = hooksArr.slice(i + 1)
+                //   break
+                // }
               }
             }
+            // Promise.resolve().then(() => {
+            //   asyncQuene.forEach(fn => {
+            //     fn.apply(this, args)
+            //   })
+            // })
           }
-          Promise.resolve().then(function () {
-            asyncQuene.forEach(function (fn) {
-              fn.apply(_this6, args);
-            });
-          });
           return result;
         });
       });
@@ -4995,20 +5270,21 @@ var MiniOptTransformer = function (_BaseOptionsTransform) {
   }, {
     key: 'resolveAttrs',
     value: function resolveAttrs() {
+      var _this5 = this;
+
       if (!this.needResolveAttrs.length) return;
-      var self = this;
       var keys = this.needResolveAttrs;
       if ((0, _type.type)(keys) === 'String') {
         keys = [keys];
       }
-      var newOptions = (0, _util.extend)({}, self.options);
+
       keys.forEach(function (key) {
-        var value = self.options[key];
+        var value = _this5.options[key];
         if ((0, _type.type)(value) !== 'Object') return;
-        delete newOptions[key];
-        (0, _util.extend)(newOptions, value);
+
+        (0, _util.extendWithIgnore)(_this5.options, value, _this5.usedHooks);
+        delete _this5.options[key];
       });
-      this.options = newOptions;
     }
   }, {
     key: 'transformProperties',
@@ -5055,17 +5331,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
 
+var _toJS = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/toJS.js");
+
+var _toJS2 = _interopRequireDefault(_toJS);
+
 var _util = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/util.js");
 
 var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
-
-var _style = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/style.js");
 
 var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/lifecycle.js");
 
@@ -5089,6 +5369,7 @@ var RuntimeWidget = function () {
 
     this.platform = config.platform || '';
     this.options = config.options;
+    this.polyHooks = config.polyHooks;
 
     this.propsName = _KEY2.default.get(this.platform + '.props');
     this.instance = _KEY2.default.get(this.platform + '.instance');
@@ -5131,6 +5412,8 @@ var RuntimeWidget = function () {
       context.__cml_disposerList__ = [];
       // update后，回调函数收集器
       context.__cml_cbCollection__ = [];
+
+      context['$cmlPolyHooks'] = this.polyHooks;
 
       //  effect computed
       context.__cml_computed__ = transformComputed(context);
@@ -5315,7 +5598,7 @@ function watchFnFactory(context) {
       oldVal = curVal;
       curVal = exprType === 'string' ? (0, _util.getByPath)(context, expr) : expr.call(context);
       if (handler.deep) {
-        curVal = (0, _mobx.toJS)(curVal, false);
+        curVal = (0, _toJS2.default)(curVal, false);
       } else if ((0, _mobx.isObservableArray)(curVal)) {
         // 强制访问，让数组被观察
         curVal.peek();
@@ -5375,8 +5658,8 @@ function updatedCbFactory(context) {
  * @param {[type]} context [description]
  */
 function setDataFactory(context, self) {
-  var _firstAction = true;
-  var _cache = void 0;
+  var _cached = false;
+  var cacheData = void 0;
 
   return function () {
     var reaction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -5384,38 +5667,48 @@ function setDataFactory(context, self) {
     if ((0, _type.type)(reaction.schedule) !== 'Function') {
       return;
     }
-
     // 缓存reaction
     context.__cml_reaction__ = reaction;
 
     var properties = context.__cml_originOptions__[self.propsName];
     var propKeys = (0, _util.enumerableKeys)(properties);
 
-    var data = (0, _util.deleteProperties)(context.__cml_ob_data__, propKeys);
+    var obData = (0, _util.deleteProperties)(context.__cml_ob_data__, propKeys);
 
-    data = (0, _mobx.toJS)(data);
+    // setData 的数据不包括 props
+    var data = (0, _toJS2.default)(obData);
 
-    if (_firstAction) {
-      _firstAction = false;
+    var diffV = void 0;
+    if (_cached) {
+      diffV = (0, _diff2.default)(data, cacheData);
 
-      _cache = Object.assign({}, data);
-      _render(data);
+      // emit 'beforeUpdate' hook ，第一次不触发
+      emit('beforeUpdate', context, data, cacheData, diffV);
     } else {
-
-      var dataDiff = (0, _diff2.default)(data, _cache);
-
-      _cache = Object.assign({}, data);
-      _render(dataDiff);
+      _cached = true;
+      diffV = data;
     }
+
+    update(diffV);
+    cacheData = _extends({}, data);
   };
 
-  function _render(data) {
+  function update(diff) {
     if ((0, _type.type)(context.setData) === 'Function') {
-      // style 处理
-      var after = (0, _style.styleHandle)(data);
-
-      context.setData(after, walkUpdatedCb(context));
+      context.setData(diff, walkUpdatedCb(context));
     }
+  }
+}
+
+function emit(name, context) {
+  var cmlVM = context.__cml_originOptions__;
+
+  if (typeof cmlVM[name] === 'function') {
+    for (var _len = arguments.length, data = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      data[_key - 2] = arguments[_key];
+    }
+
+    cmlVM[name].apply(context, data);
   }
 }
 
@@ -5425,6 +5718,9 @@ function setDataFactory(context, self) {
  * @return {[type]}       [description]
  */
 function walkUpdatedCb(context) {
+  // emit 'updated' hook
+  emit('updated', context);
+
   var cb = void 0;
   var pendingList = context.__cml_cbCollection__.slice(0);
   context.__cml_cbCollection__.length = 0;
@@ -5524,19 +5820,25 @@ var _config = __webpack_require__("./node_modules/chameleon-runtime/src/platform
 
 var _config2 = _interopRequireDefault(_config);
 
+var _api = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/api.interface");
+
+var _api2 = _interopRequireDefault(_api);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var instanceAPI = _api2.default.getInstance();
 
 var KEY = {
   wx: {
-    instance: typeof wx !== 'undefined' ? wx : undefined,
+    instance: instanceAPI,
     props: 'properties'
   },
   alipay: {
-    instance: typeof my !== 'undefined' ? my : undefined,
+    instance: instanceAPI,
     props: 'props'
   },
   baidu: {
-    instance: typeof swan !== 'undefined' ? swan : undefined,
+    instance: instanceAPI,
     props: 'properties'
   }
 };
@@ -5545,8 +5847,8 @@ exports.default = new _config2.default(KEY);
 
 /***/ }),
 
-/***/ "./node_modules/chameleon-runtime/src/platform/common/util/Trie.js":
-/***/ (function(module, exports) {
+/***/ "./node_modules/chameleon-runtime/src/platform/common/util/api.interface":
+/***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -5554,106 +5856,337 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Trie
- */
-var Trie = function () {
-  function Trie() {
-    _classCallCheck(this, Trie);
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-yanxuan/node_modules/chameleon-runtime/src/platform/common/util/api.interface";
+var __CML_ERROR__ = function throwError(content) {
+  throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
+};
 
-    this.root = new TrieNode(null, false);
-    this.ret = [];
-    this.count = 0;
-  }
-
-  // str = 'a.b.[0]'
-
-
-  _createClass(Trie, [{
-    key: 'insertData',
-    value: function insertData() {
-      var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-      var stringArr = str.split('.');
-      this.insert(stringArr, this.root);
-    }
-
-    // 递归判断插入
-
-  }, {
-    key: 'insert',
-    value: function insert(stringArr, node) {
-      if (stringArr.length === 0) {
-        return;
+var __enableTypes__ = "";
+var __CHECK__DEFINES__ = {
+  "types": {},
+  "interfaces": {
+    "getInstanceInterface": {
+      "getInstance": {
+        "input": [],
+        "output": "CMLObject"
       }
-      this.count++;
+    }
+  },
+  "classes": {
+    "Method": ["getInstanceInterface"]
+  }
+};
+var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
+  var className = obj.constructor.name;
+  /* eslint-disable no-undef */
+  var defines = __CHECK__DEFINES__;
+  var enableTypes = __enableTypes__.split(',') || []; // ['Object','Array','Nullable']
+  /* eslint-disable no-undef */
+  var types = defines.types;
+  var interfaceNames = defines.classes[className];
+  var methods = {};
 
-      var children = node.children;
-      var data = null;
+  interfaceNames && interfaceNames.forEach(function (interfaceName) {
+    var keys = Object.keys(defines.interfaces);
+    keys.forEach(function (key) {
+      Object.assign(methods, defines.interfaces[key]);
+    });
+  });
 
-      for (var i in children) {
-        if (children[i].key === stringArr[0]) {
-          data = children[i];
-          break;
+  /**
+   * 获取类型
+   *
+   * @param  {*}      value 值
+   * @return {string}       类型
+   */
+  var getType = function getType(value) {
+    if (value instanceof Promise) {
+      return "Promise";
+    }
+    var type = Object.prototype.toString.call(value);
+    return type.replace(/\[object\s(.*)\]/g, '$1').replace(/( |^)[a-z]/g, function (L) {
+      return L.toUpperCase();
+    });
+  };
+
+  /**
+   * 校验类型  两个loader共用代码
+   *
+   * @param  {*}      value 实际传入的值
+   * @param  {string} type  静态分析时候得到的值得类型
+   * @param  {array[string]} errList 校验错误信息  类型
+   * @return {bool}         校验结果
+   */
+
+  /* eslint complexity:[2,39] */
+  var checkType = function checkType(value, originType) {
+    var errList = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+    var isNullableReg = /_cml_nullable_lmc_/g;
+    var type = originType.replace('_cml_nullable_lmc_', '');
+    type === "Void" && (type = "Undefined");
+    var currentType = getType(value);
+    var canUseNullable = enableTypes.includes("Nullable");
+    var canUseObject = enableTypes.includes("Object");
+    if (currentType == 'Null') {
+      if (type == "Null") {
+        // 如果定义的参数的值就是 Null，那么校验通过
+        errList = [];
+      } else {
+        // 那么判断是否是可选参数的情况
+        canUseNullable && isNullableReg.test(originType) ? errList = [] : errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u786E\u8BA4\u662F\u5426\u5F00\u542Fnullable\u914D\u7F6E");
+      }
+      return errList;
+    }
+    if (currentType == 'Undefined') {
+      // 如果运行时传入的真实值是undefined,那么可能改值在接口处就是被定义为 Undefined类型或者是 ?string 这种可选参数 nullable的情况；
+      if (type == "Undefined") {
+        errList = [];
+      } else {
+        canUseNullable && isNullableReg.test(originType) ? errList = [] : errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u786E\u8BA4\u662F\u5426\u5F00\u542Fnullable\u914D\u7F6E\u6216\u8005\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
+    }
+    if (currentType == 'String') {
+      if (type == 'String') {
+        errList = [];
+      } else {
+        errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
+    }
+    if (currentType == 'Boolean') {
+      if (type == 'Boolean') {
+        errList = [];
+      } else {
+        errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
+    }
+    if (currentType == 'Number') {
+      if (type == 'Number') {
+        errList = [];
+      } else {
+        errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
+    }
+    if (currentType == 'Object') {
+      if (type == 'Object') {
+        !canUseObject ? errList.push("\u4E0D\u80FD\u76F4\u63A5\u5B9A\u4E49\u7C7B\u578B" + type + "\uFF0C\u9700\u8981\u4F7F\u7528\u7B26\u5408\u7C7B\u578B\u5B9A\u4E49\uFF0C\u8BF7\u786E\u8BA4\u662F\u5426\u5F00\u542F\u4E86\u53EF\u4EE5\u76F4\u63A5\u5B9A\u4E49 Object \u7C7B\u578B\u53C2\u6570\uFF1B") : errList = [];
+      } else if (type == 'CMLObject') {
+        errList = [];
+      } else {
+        // 这种情况的对象就是自定义的对象；
+        if (types[type]) {
+          var _keys = Object.keys(types[type]);
+          // todo 这里是同样的问题，可能多传递
+          _keys.forEach(function (key) {
+            var subError = checkType(value[key], types[type][key], []);
+            if (subError && subError.length) {
+              errList = errList.concat(subError);
+            }
+          });
+          if (Object.keys(value).length > _keys.length) {
+            errList.push("type [" + type + "] \u53C2\u6570\u4E2A\u6570\u4E0E\u5B9A\u4E49\u4E0D\u7B26");
+          }
+        } else {
+          errList.push('找不到定义的type [' + type + ']!');
+        }
+      }
+      return errList;
+    }
+    if (currentType == 'Array') {
+      if (type == 'Array') {
+        !canUseObject ? errList.push("\u4E0D\u80FD\u76F4\u63A5\u5B9A\u4E49\u7C7B\u578B" + type + "\uFF0C\u9700\u8981\u4F7F\u7528\u7B26\u5408\u7C7B\u578B\u5B9A\u4E49\uFF0C\u8BF7\u786E\u8BA4\u662F\u5426\u5F00\u542F\u4E86\u53EF\u4EE5\u76F4\u63A5\u5B9A\u4E49 Array \u7C7B\u578B\u53C2\u6570\uFF1B") : errList = [];
+      } else {
+        if (types[type]) {
+          // 数组元素的类型
+          var itemType = types[type][0];
+          for (var i = 0; i < value.length; i++) {
+            var subError = checkType(value[i], itemType, []);
+            if (subError && subError.length) {
+              errList = errList.concat(subError);
+            }
+          }
+        } else {
+          errList.push('找不到定义的type [' + type + ']!');
         }
       }
 
-      if (data && stringArr.length === 1) {
-        data.isEnd = true;
-      } else if (!data) {
-        var isEnd = stringArr.length === 1 ? true : false;
-        data = new TrieNode(stringArr[0], isEnd);
-        children.push(data);
-      }
-
-      this.insert(stringArr.splice(1), data); //将该字符节点插入节点的children中
+      return errList;
     }
-  }, {
-    key: 'getShortPaths',
-    value: function getShortPaths() {
-      for (var i in this.root.children) {
-        this.getHelper(this.root.children[i], [this.root.children[i].key]);
+    if (currentType == 'Function') {
+      // if (type == 'Function') {
+      //   errList = [];
+      // } else {
+      //   errList.push(`定义了${type}类型的参数，传入的却是${currentType},请检查所传参数是否和接口定义的一致`)
+      // }
+      if (types[type]) {
+        if (!types[type].input && !types[type].output) {
+          errList.push("\u627E\u4E0D\u5230" + types[type] + " \u51FD\u6570\u5B9A\u4E49\u7684\u8F93\u5165\u8F93\u51FA");
+        }
+      } else {
+        errList.push('找不到定义的type [' + type + ']!');
       }
-      return this.ret;
+      return errList;
+    }
+    if (currentType == 'Promise') {
+      if (type == 'Promise') {
+        errList = [];
+      } else {
+        errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
+    }
+    if (currentType == 'Date') {
+      if (type == 'Date') {
+        errList = [];
+      } else {
+        errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
+    }
+    if (currentType == 'RegExp') {
+      if (type == 'RegExp') {
+        errList = [];
+      } else {
+        errList.push("\u5B9A\u4E49\u4E86" + type + "\u7C7B\u578B\u7684\u53C2\u6570\uFF0C\u4F20\u5165\u7684\u5374\u662F" + currentType + ",\u8BF7\u68C0\u67E5\u6240\u4F20\u53C2\u6570\u662F\u5426\u548C\u63A5\u53E3\u5B9A\u4E49\u7684\u4E00\u81F4");
+      }
+      return errList;
     }
 
-    // 递归输出字符串
+    return errList;
+  };
 
-  }, {
-    key: 'getHelper',
-    value: function getHelper(node, data) {
-      if (node.isEnd) {
-        this.ret.push(data.join('.'));
-        return;
+  /**
+   * 校验参数类型
+   *
+   * @param  {string} methodName 方法名称
+   * @param  {Array}  argNames   参数名称列表
+   * @param  {Array}  argValues  参数值列表
+   * @return {bool}              校验结果
+   */
+  var checkArgsType = function checkArgsType(methodName, argValues) {
+    var argList = void 0;
+
+    if (getType(methodName) == 'Array') {
+      // 回调函数的校验    methodName[0] 方法的名字 methodName[1]该回调函数在方法的参数索引
+      argList = types[methods[methodName[0]].input[methodName[1]]].input;
+      // 拿到这个回调函数的参数定义
+    } else {
+      argList = methods[methodName].input;
+    }
+    // todo 函数可能多传参数
+    argList.forEach(function (argType, index) {
+      var errList = checkType(argValues[index], argType, []);
+      if (errList && errList.length > 0) {
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
-      for (var i in node.children) {
-        data.push(node.children[i].key);
-        this.getHelper(node.children[i], data);
-        data.pop(); // 注意，找打一个单词后，返回下一个初始节点继续遍历
-      }
+    });
+    if (argValues.length > argList.length) {
+      __CML_ERROR__("[" + methodName + "]\u65B9\u6CD5\u53C2\u6570\u4F20\u9012\u4E2A\u6570\u4E0E\u5B9A\u4E49\u4E0D\u7B26");
+    }
+  };
+
+  /**
+   * 校验返回值类型
+   *
+   * @param  {string} methodName 方法名称
+   * @param  {*}      returnData 返回值
+   * @return {bool}              校验结果
+   */
+  var checkReturnType = function checkReturnType(methodName, returnData) {
+    var output = void 0;
+    if (getType(methodName) == 'Array') {
+      output = types[methods[methodName[0]].input[methodName[1]]].output;
+    } else {
+      output = methods[methodName].output;
+    }
+    // todo output 为什么可以是数组
+    // if (output instanceof Array) {
+    //   output.forEach(type => {
+
+    //     //todo 而且是要有一个校验不符合就check失败？ 应该是有一个校验通过就可以吧
+    //     checkType(returnData, type,[])
+    //   });
+    // }
+    var errList = checkType(returnData, output, []);
+    if (errList && errList.length > 0) {
+      __CML_ERROR__("\n      \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u8FD4\u56DE\u503C\n      \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+    }
+  };
+
+  /**
+   * 创建warpper
+   *
+   * @param  {string}   funcName   方法名称
+   * @param  {Function} originFunc 原有方法
+   * @return {Function}            包裹后的方法
+   */
+  var createWarpper = function createWarpper(funcName, originFunc) {
+    return function () {
+      var argValues = Array.prototype.slice.call(arguments).map(function (arg, index) {
+        // 对传入的方法要做特殊的处理，这个是传入的callback，对callback函数再做包装
+        if (getType(arg) == 'Function') {
+          return createWarpper([funcName, index], arg);
+        }
+        return arg;
+      });
+
+      checkArgsType(funcName, argValues);
+
+      var result = originFunc.apply(this, argValues);
+
+      checkReturnType(funcName, result);
+      return result;
+    };
+  };
+
+  // 获取所有方法
+  var keys = Object.keys(methods);
+
+  // 处理包装方法
+  keys.forEach(function (key) {
+    var originFunc = obj[key];
+    if (!originFunc) {
+      __CML_ERROR__('method [' + key + '] not found!');
+      return;
+    }
+
+    if (obj.hasOwnProperty(key)) {
+      obj[key] = createWarpper(key, originFunc);
+    } else {
+      Object.getPrototypeOf(obj)[key] = createWarpper(key, originFunc);
+    }
+  });
+
+  return obj;
+};
+// 定义模块的interface
+
+var Method = function () {
+  function Method() {
+    _classCallCheck(this, Method);
+  }
+
+  _createClass(Method, [{
+    key: "getInstance",
+    value: function getInstance() {
+      return my;
     }
   }]);
 
-  return Trie;
+  return Method;
 }();
 
-/**
- * 节点
- * @param {*} key 
- */
+exports.default = __OBJECT__WRAPPER__(new Method());
 
-
-exports.default = Trie;
-
-var TrieNode = function TrieNode(key, isEnd) {
-  _classCallCheck(this, TrieNode);
-
-  this.key = key; // 节点字符
-  this.children = []; // 子节点集合
-  this.isEnd = isEnd;
-};
+(0, _util.copyProtoProperty)(exports.default);
 
 /***/ }),
 
@@ -5739,118 +6272,85 @@ exports.default = diff;
 
 var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
 
-var _Trie = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/Trie.js");
-
-var _Trie2 = _interopRequireDefault(_Trie);
-
 var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function diff(current, old) {
+  var out = {};
+  prefill(current, old);
+  iDiff(current, old, '', out);
 
-function diff(newData, oldData) {
-  return innerDiff(newData, oldData);
-  var diffData = {};
-  var newDataFlag = [];
-  var oldDataFlag = [];
-  var newFlatData = {};
-  var oldFlatData = {};
-
-  flatten(newData, '', newDataFlag, newFlatData);
-  flatten(oldData, '', oldDataFlag, oldFlatData);
-
-  newDataFlag.forEach(function (path) {
-    var nVal = newFlatData[path];
-    var oVal = oldFlatData[path];
-
-    if (nVal !== oVal) {
-      updateDiff(nVal, path);
-    }
-
-    deleFlag(oldDataFlag, path);
-  });
-
-  var trie = new _Trie2.default();
-
-  oldDataFlag.forEach(function (path) {
-    trie.insertData(path);
-  });
-
-  trie.getShortPaths().filter(function (item) {
-    return item;
-  }).forEach(function (path) {
-    // update delete item
-    updateDiff('', path);
-  });
-
-  function updateDiff(val, path) {
-    if (val !== undefined) {
-      diffData[path] = val;
-    }
+  if (Object.keys(out).length === 1 && out[''] !== undefined) {
+    out = out[''];
   }
 
-  return diffData;
+  // console.log('diff------:', out)
+  return out;
 }
 
-function hasFlag(collectAry, path) {
-  return collectAry.indexOf(path);
-}
+function prefill(current, old) {
+  if (_mobx.extras.deepEqual(current, old)) return;
 
-function deleFlag(collectAry, path) {
-  var index = hasFlag(collectAry, path);
-  if (index !== -1) {
-    collectAry.splice(index, 1);
-  }
-}
+  if ((0, _type.type)(current) === 'Object' && (0, _type.type)(old) === 'Object') {
+    var curLength = Object.keys(current).length;
+    var oldLength = Object.keys(old).length;
 
-function check(str) {
-  if (!str) {
-    console.error('pathStr should not be null!');
-    return false;
-  }
-  return true;
-}
-
-function flatten(d) {
-  var pathStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var collectAry = arguments[2];
-  var flatData = arguments[3];
-
-  if ((0, _type.type)(d) === 'Array') {
-    check(pathStr);
-
-    if (d.length === 0) {
-      collectAry.push(pathStr);
-      if (flatData) {
-        flatData[pathStr] = d;
+    if (curLength >= oldLength) {
+      for (var key in old) {
+        var curVal = current[key];
+        if (curVal === undefined) {
+          current[key] = '';
+        } else {
+          prefill(curVal, old[key]);
+        }
       }
-      return;
     }
+  } else if ((0, _type.type)(current) === 'Array' && (0, _type.type)(old) === 'Array') {
+    if (current.length >= old.length) {
+      old.forEach(function (item, index) {
+        prefill(current[index], item);
+      });
+    }
+  }
+}
 
-    d.forEach(function (item, i) {
-      var path = pathStr + '[' + i + ']';
-      flatten(item, path, collectAry, flatData);
-    });
-  } else if ((0, _type.type)(d) === 'Object') {
-    if (Object.keys(d).length === 0) {
-      collectAry.push(pathStr);
-      if (flatData) {
-        flatData[pathStr] = d;
+function iDiff(current, old, path, result) {
+  if (_mobx.extras.deepEqual(current, old)) return;
+
+  if ((0, _type.type)(current) === 'Object' && (0, _type.type)(old) === 'Object') {
+    var curLength = Object.keys(current).length;
+    var oldLength = Object.keys(old).length;
+
+    if (curLength >= oldLength) {
+      for (var key in current) {
+        var curVal = current[key];
+        var oldVal = old[key];
+
+        iDiff(curVal, oldVal, getPath(path, key), result);
       }
-      return;
+    } else {
+      update(current, path, result);
     }
-
-    Object.keys(d).forEach(function (k) {
-      var v = d[k];
-      var path = pathStr ? isNum(k) ? pathStr + '[' + k + ']' : pathStr + '.' + k : k;
-      flatten(v, path, collectAry, flatData);
+  } else if ((0, _type.type)(current) === 'Array' && (0, _type.type)(old) === 'Array' && current.length >= old.length) {
+    current.forEach(function (item, index) {
+      iDiff(item, old[index], getPath(path, index, 'array'), result);
     });
   } else {
-    check(pathStr);
-    collectAry.push(pathStr);
-    if (flatData) {
-      flatData[pathStr] = d;
-    }
+    update(current, path, result);
   }
+}
+
+function update(item, path, collection) {
+  if (item !== undefined) {
+    collection[path] = item;
+  }
+}
+
+function getPath(pathStr, key, type) {
+  if (type === 'array') {
+    return pathStr + '[' + key + ']';
+  }
+
+  return isNum(key) ? pathStr + '[' + key + ']' : pathStr ? pathStr + '.' + key : key;
 }
 
 function isNaN(value) {
@@ -5861,64 +6361,6 @@ function isNaN(value) {
 function isNum(value) {
   return !isNaN(Number(value));
 }
-
-function innerDiff(newData, oldData) {
-
-  var diffData = {};
-  Object.keys(newData).forEach(function (key) {
-    if (!_mobx.extras.deepEqual(newData[key], oldData[key])) {
-      diffData[key] = newData[key];
-    }
-  });
-
-  return diffData;
-}
-
-/**
-     * func initFlag(){oldData{'k1':'v1','k2':{'k3':'v3'}} -> oldDataFlag[] record to ['k1','k2.k3']}
-     * func deleFlag(path){ index = oldDataFlag.indexOf(path) ? oldDataFlag[path].splice(index)}
-     * 
-     * func update(path,val){ diffData[path] = oldData[path] = val;}
-     * 
-     * 深度遍历
-     * initial
-     * 一、if Object
-     * forEach 
-     *  goto initial && record path
-     * 二、if Array
-      forEach 
-        goto initial && record path
-     * 三、others
-      1)、if oldDataFlag.hasOwnProperty(path), newData有oldData有：
-        if newData[path] != oldData[path]
-          update(newData[path], path) && deleFlag(path)
-      2)、else newData有oldData无：
-        update(newData[path], path)
-      
-    after newData无oldData有情况：
-    剩余 oldDataFlag[path] 代表 need to delete
-    needToDele[]
-
-    使用字典树算法替代 复杂度是O(所有keyPath长度之和)
-    trie = []
-    forEach oldDataFlag -> i
-      path = oldDataFlag[i]
-      nodes = path.split('.')
-      forEach nodes -> node
-        record node
-      
-    forEach oldDataFlag[1~len-1] -> i
-        forEach oldDataFlag[i~len-1] -> j
-            if oldDataFlag[i].indexOf(oldDataFlag[j])
-              flag = notAdd
-        if ! notAdd , needToDele.push[oldDataFlag[i]]
-    forEach needToDele
-      find parentPath,if newData[parentPath], update(newData[parentPath],parentPath)
-    
-    oldData = Object.assgin({},newData)
-    initFlag()
-     * 
-     */
 
 /***/ }),
 
@@ -5937,14 +6379,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LIFECYCLE = {
   web: {
-    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeDestroy', 'destroyed']
+    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'beforeRouteEnter', 'beforeRouteLeave', 'beforeRouteUpdate'],
+    hooksMap: {
+      'viewappear': 'beforeRouteEnter',
+      'viewdisappear': 'beforeRouteLeave'
+    },
+    polyHooks: ['beforeRouteEnter', 'beforeRouteLeave', 'beforeRouteUpdate']
   },
   weex: {
-    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeDestroy', 'destroyed']
+    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'viewappear', 'viewdisappear']
   },
   wx: {
     app: {
-      hooks: ['onLaunch', 'onShow', 'onHide'],
+      hooks: ['onLaunch', 'onShow', 'onHide', 'onError', 'onPageNotFound'],
       hooksMap: {
         'beforeCreate': 'onLaunch',
         'created': 'onLaunch',
@@ -5953,10 +6400,11 @@ var LIFECYCLE = {
         'beforeDestroy': 'onHide',
         'destroyed': 'onHide'
       },
-      whitelist: ['onError', 'onPageNotFound']
+      usedHooks: ['onLaunch', 'onShow', 'onHide'],
+      polyHooks: ['onError', 'onPageNotFound']
     },
     page: {
-      hooks: ['onLoad', 'onShow', 'onReady', 'onHide', 'onUnload'],
+      hooks: ['onLoad', 'onShow', 'onReady', 'onHide', 'onUnload', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap'],
       hooksMap: {
         'beforeCreate': 'onLoad',
         'created': 'onLoad',
@@ -5964,11 +6412,13 @@ var LIFECYCLE = {
         'mounted': 'onShow',
         'beforeDestroy': 'onUnload',
         'destroyed': 'onUnload'
+
       },
-      whitelist: ['onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap', 'onReady', 'onHide']
+      usedHooks: ['onLoad', 'onShow', 'onUnload'],
+      polyHooks: ['onReady', 'onHide', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap']
     },
     component: {
-      hooks: ['created', 'attached', 'ready', 'detached'],
+      hooks: ['created', 'attached', 'ready', 'detached', 'moved'],
       hooksMap: {
         'beforeCreate': 'created',
         'created': 'attached',
@@ -5977,12 +6427,13 @@ var LIFECYCLE = {
         'beforeDestroy': 'detached',
         'destroyed': 'detached'
       },
-      whitelist: ['moved']
+      usedHooks: ['created', 'attached', 'ready', 'detached'],
+      polyHooks: ['moved']
     }
   },
   alipay: {
     app: {
-      hooks: ['onLaunch', 'onShow', 'onHide'],
+      hooks: ['onLaunch', 'onShow', 'onHide', 'onError', 'onPageNotFound'],
       hooksMap: {
         'beforeCreate': 'onLaunch',
         'created': 'onLaunch',
@@ -5991,10 +6442,11 @@ var LIFECYCLE = {
         'beforeDestroy': 'onHide',
         'destroyed': 'onHide'
       },
-      whitelist: ['onError', 'onPageNotFound']
+      usedHooks: ['onLaunch', 'onShow', 'onHide'],
+      polyHooks: ['onError', 'onPageNotFound']
     },
     page: {
-      hooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload'],
+      hooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onTitleClick', 'onPageScroll', 'onTabItemTap', 'onOptionMenuClick', 'onPopMenuClick', 'onPullIntercept'],
       hooksMap: {
         'beforeCreate': 'onLoad',
         'created': 'onLoad',
@@ -6002,8 +6454,10 @@ var LIFECYCLE = {
         'mounted': 'onShow',
         'beforeDestroy': 'onUnload',
         'destroyed': 'onUnload'
+
       },
-      whitelist: ['onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onTitleClick', 'onReady', 'onHide']
+      usedHooks: ['onLoad', 'onShow', 'onUnload'],
+      polyHooks: ['onReady', 'onHide', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onTitleClick', 'onPageScroll', 'onTabItemTap', 'onOptionMenuClick', 'onPopMenuClick', 'onPullIntercept']
     },
     component: {
       hooks: ['didMount', 'didUnmount'],
@@ -6015,12 +6469,13 @@ var LIFECYCLE = {
         'beforeDestroy': 'didUnmount',
         'destroyed': 'didUnmount'
       },
-      whitelist: []
+      usedHooks: ['didMount', 'didUnmount'],
+      polyHooks: []
     }
   },
   baidu: {
     app: {
-      hooks: ['onLaunch', 'onShow', 'onHide'],
+      hooks: ['onLaunch', 'onShow', 'onHide', 'onError', 'onPageNotFound'],
       hooksMap: {
         'beforeCreate': 'onLaunch',
         'created': 'onLaunch',
@@ -6029,10 +6484,11 @@ var LIFECYCLE = {
         'beforeDestroy': 'onHide',
         'destroyed': 'onHide'
       },
-      whitelist: ['onError', 'onPageNotFound']
+      usedHooks: ['onLaunch', 'onShow', 'onHide'],
+      polyHooks: ['onError', 'onPageNotFound']
     },
     page: {
-      hooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload'],
+      hooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload', 'onForceReLaunch', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onTabItemTap'],
       hooksMap: {
         'beforeCreate': 'onLoad',
         'created': 'onLoad',
@@ -6040,8 +6496,10 @@ var LIFECYCLE = {
         'mounted': 'onShow',
         'beforeDestroy': 'onUnload',
         'destroyed': 'onUnload'
+
       },
-      whitelist: ['onForceReLaunch', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onTabItemTap', 'onReady', 'onHide']
+      usedHooks: ['onLoad', 'onShow', 'onUnload'],
+      polyHooks: ['onReady', 'onHide', 'onForceReLaunch', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onTabItemTap']
     },
     component: {
       hooks: ['created', 'attached', 'ready', 'detached'],
@@ -6053,11 +6511,12 @@ var LIFECYCLE = {
         'beforeDestroy': 'detached',
         'destroyed': 'detached'
       },
-      whitelist: []
+      usedHooks: ['created', 'attached', 'ready', 'detached'],
+      polyHooks: []
     }
   },
   cml: {
-    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeDestroy', 'destroyed']
+    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'viewappear', 'viewdisappear']
   }
 };
 
@@ -6181,10 +6640,9 @@ Object.defineProperty(exports, "__esModule", {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 exports.styleHandle = styleHandle;
+exports.pxTransform = pxTransform;
 
 var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
-
-var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
 
 function styleHandle(source) {
   var detectCycles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -6209,8 +6667,6 @@ function styleHandle(source) {
       }
     }
   }
-
-  source = (0, _mobx.toJS)(source);
 
   if ((0, _type.type)(source) === 'Array') {
     var res = cache([]);
@@ -6249,6 +6705,101 @@ function pxTransform(s) {
 
 /***/ }),
 
+/***/ "./node_modules/chameleon-runtime/src/platform/common/util/toJS.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = toJS;
+
+var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
+
+var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
+
+var _style = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/style.js");
+
+function toJS(source, detectCycles, __alreadySeen) {
+    var needPxTransfer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+    if (detectCycles === void 0) {
+        detectCycles = true;
+    }
+    if (__alreadySeen === void 0) {
+        __alreadySeen = [];
+    }
+    // optimization: using ES6 map would be more efficient!
+    // optimization: lift this function outside toJS, this makes recursion expensive
+    function cache(value) {
+        if (detectCycles) __alreadySeen.push([source, value]);
+        return value;
+    }
+
+    if (detectCycles && __alreadySeen === null) __alreadySeen = [];
+    if (detectCycles && source !== null && (typeof source === 'undefined' ? 'undefined' : _typeof(source)) === "object") {
+        for (var i = 0, l = __alreadySeen.length; i < l; i++) {
+            if (__alreadySeen[i][0] === source) return __alreadySeen[i][1];
+        }
+    }
+
+    if ((0, _mobx.isObservable)(source)) {
+        if ((0, _mobx.isObservableArray)(source)) {
+            var res = cache([]);
+            var toAdd = source.map(function (value) {
+                return toJS(value, detectCycles, __alreadySeen);
+            });
+            res.length = toAdd.length;
+            for (var i = 0, l = toAdd.length; i < l; i++) {
+                res[i] = toAdd[i];
+            }return res;
+        }
+        if ((0, _mobx.isObservableObject)(source)) {
+            var res = cache({});
+            for (var key in source) {
+                res[key] = toJS(source[key], detectCycles, __alreadySeen);
+            }return res;
+        }
+        if ((0, _mobx.isObservableMap)(source)) {
+            var res_1 = cache({});
+            source.forEach(function (value, key) {
+                return res_1[key] = toJS(value, detectCycles, __alreadySeen);
+            });
+            return res_1;
+        }
+        if ((0, _mobx.isBoxedObservable)(source)) return toJS(source.get(), detectCycles, __alreadySeen);
+    } else {
+        if ((0, _type.type)(source) === 'Array') {
+            var _res = cache([]);
+            var _toAdd = source.map(function (value) {
+                return toJS(value, detectCycles, __alreadySeen);
+            });
+
+            _res.length = _toAdd.length;
+            for (var _i = 0, _l = _toAdd.length; _i < _l; _i++) {
+                _res[_i] = _toAdd[_i];
+            }
+
+            return _res;
+        } else if ((0, _type.type)(source) === 'Object') {
+            var _res2 = cache({});
+            for (var _key in source) {
+                _res2[_key] = toJS(source[_key], detectCycles, __alreadySeen);
+            }
+            return _res2;
+        } else if ((0, _type.type)(source) === 'String') {
+            // cpx to rpx
+            return needPxTransfer ? (0, _style.pxTransform)(source) : source;
+        } else {
+            return source;
+        }
+    }
+}
+
+/***/ }),
+
 /***/ "./node_modules/chameleon-runtime/src/platform/common/util/type.js":
 /***/ (function(module, exports) {
 
@@ -6260,8 +6811,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 exports.type = type;
 exports.isObject = isObject;
+exports.isPlainObject = isPlainObject;
+
+var toString = Object.prototype.toString;
+
 function type(n) {
-  return Object.prototype.toString.call(n).slice(8, -1);
+  return toString.call(n).slice(8, -1);
 }
 
 /**
@@ -6271,6 +6826,14 @@ function type(n) {
  */
 function isObject(obj) {
   return obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object';
+}
+
+/**
+ * Strict object type check. Only returns true
+ * for plain JavaScript objects.
+ */
+function isPlainObject(obj) {
+  return type(obj) === 'Object';
 }
 
 /***/ }),
@@ -6287,10 +6850,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.propToFn = propToFn;
+exports.transferLifecycle = transferLifecycle;
 exports.rename = rename;
 exports.normalizeMap = normalizeMap;
 exports.merge = merge;
 exports.extend = extend;
+exports.extendWithIgnore = extendWithIgnore;
 exports.isExistAttr = isExistAttr;
 exports.getByPath = getByPath;
 exports.enumerable = enumerable;
@@ -6306,10 +6871,60 @@ function propToFn(obj, name) {
   if (obj && (0, _type.isObject)(obj[name])) {
     var _temp = obj[name];
 
-    obj[name] = function () {
-      return _extends({}, _temp);
-    };
+    if ((0, _type.isPlainObject)(_temp)) {
+      obj[name] = function () {
+        return _extends({}, _temp);
+      };
+    } else {
+      obj[name] = function () {
+        return _temp;
+      };
+    }
   }
+}
+
+/**
+ * 生命周期映射
+ * @param  {Object} VMObj vm对象
+ * @param  {Object} hooksMap 映射表
+ * @return {Object}     修改后值
+ */
+function transferLifecycle(VMObj, hooksMap) {
+  if (!hooksMap) {
+    return;
+  }
+
+  var _hooksTemp = [];
+  var _mapTemp = {};
+  // 将生命周期 键名 处理成 [`$_${key}`]
+  Object.keys(hooksMap).forEach(function (key) {
+    var uniKey = '$_' + key;
+    _hooksTemp.push(uniKey);
+    _mapTemp[uniKey] = hooksMap[key];
+
+    if (VMObj.hasOwnProperty(key)) {
+      VMObj[uniKey] = VMObj[key];
+      delete VMObj[key];
+    }
+  });
+
+  _hooksTemp.forEach(function (uniKey) {
+    var mapKey = _mapTemp[uniKey];
+    var hook = VMObj[uniKey];
+
+    if (VMObj.hasOwnProperty(uniKey) && mapKey && hook) {
+      if (VMObj.hasOwnProperty(mapKey)) {
+        if ((0, _type.type)(VMObj[mapKey]) !== 'Array') {
+          VMObj[mapKey] = [VMObj[mapKey], hook];
+        } else {
+          VMObj[mapKey].push(hook);
+        }
+      } else {
+        VMObj[mapKey] = [hook];
+      }
+      delete VMObj[uniKey];
+    }
+  });
 }
 
 /**
@@ -6395,6 +7010,20 @@ function extend(target) {
     }
   }
 
+  return target;
+}
+
+function extendWithIgnore(target, from) {
+  var ignore = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+  if ((0, _type.type)(from) === 'Object') {
+    // for in 能遍历原型链上的属性
+    for (var key in from) {
+      if (!~ignore.indexOf(key)) {
+        target[key] = from[key];
+      }
+    }
+  }
   return target;
 }
 
@@ -6873,7 +7502,7 @@ var __OBJECT__WRAPPER__ = function __OBJECT__WRAPPER__(obj) {
     argList.forEach(function (argType, index) {
       var errList = checkType(argValues[index], argType, []);
       if (errList && errList.length > 0) {
-        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + "\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
+        __CML_ERROR__("\n        \u6821\u9A8C\u4F4D\u7F6E: \u65B9\u6CD5" + methodName + " \u6216\u8BE5" + methodName + "\u7684\u56DE\u8C03\u51FD\u6570\u4E2D\u7B2C" + (index + 1) + "\u4E2A\u53C2\u6570\n        \u9519\u8BEF\u4FE1\u606F: " + errList.join('\n'));
       }
     });
     if (argValues.length > argList.length) {

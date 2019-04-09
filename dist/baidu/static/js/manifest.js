@@ -35,7 +35,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		45: 0
+/******/ 		44: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -93,7 +93,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://172.24.36.108:8000/baidu/";
+/******/ 	__webpack_require__.p = "http://172.24.36.57:8000/baidu/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };

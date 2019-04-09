@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([42],{
+__CML__GLOBAL.webpackJsonp([9],{
 
 /***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -7,6 +7,8 @@ __CML__GLOBAL.webpackJsonp([42],{
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _util = __webpack_require__("./node_modules/chameleon-ui-builtin/components/button/util.js");
 
 var _chameleonRuntime = __webpack_require__("./node_modules/chameleon-runtime/index.js");
 
@@ -58,6 +60,7 @@ var __INTERFAE__DEFINES__ = {
     "ButtonInterface": {
       "text": "String",
       "size": "String",
+      "width": "Number",
       "type": "String",
       "disabled": "Boolean",
       "btnStyle": "String",
@@ -362,40 +365,6 @@ var __CML__WRAPPER__ = function wrapper(obj) {
 
   return obj;
 };
-function transCls(base, cxt) {
-  var type = cxt.type,
-      disabled = cxt.disabled,
-      size = cxt.size,
-      hover = cxt.hover;
-
-  var classList = [base];
-
-  if (hover) {
-    classList.push(base + "-active");
-  }
-
-  if (!!~'red|orange|white|green'.indexOf(type)) {
-    classList.push(base + "-" + type);
-
-    if (hover) {
-      classList.push(base + "-" + type + "-active");
-    }
-
-    if (disabled) {
-      classList.push(base + "-" + type + "-disable");
-    }
-  }
-
-  if (!!~'full|big|medium|small'.indexOf(size)) {
-    classList.push(base + "-" + size);
-  }
-
-  if (disabled) {
-    classList.push(base + "-disable");
-  }
-
-  return classList.join(' ');
-}
 
 var Button = function Button() {
   _classCallCheck(this, Button);
@@ -403,11 +372,15 @@ var Button = function Button() {
   this.props = {
     text: {
       type: String,
-      default: "确定"
+      default: ""
     },
     size: {
       type: String,
-      default: "none"
+      default: "stretch"
+    },
+    width: {
+      type: Number,
+      default: -1
     },
     type: {
       type: String,
@@ -478,20 +451,31 @@ var Button = function Button() {
     hover: false
   };
   this.computed = {
+    hasWidth: function hasWidth() {
+      return this.width !== -1;
+    },
     btnClasses: function btnClasses() {
-      return transCls('cml-btn', this);
+      return (0, _util.transCls)('cml-view cml-btn', this);
     },
     textClasses: function textClasses() {
-      return transCls('btn-text', this);
+      return (0, _util.transCls)('btn-text', this);
     },
     mrBtnStyle: function mrBtnStyle() {
       var disabled = this.disabled,
           btnStyle = this.btnStyle,
           disabledStyle = this.disabledStyle,
           hover = this.hover,
-          btnHoverStyle = this.btnHoverStyle;
+          btnHoverStyle = this.btnHoverStyle,
+          hasWidth = this.hasWidth,
+          width = this.width;
 
-      return disabled ? btnStyle + ";" + disabledStyle : hover ? btnStyle + ";" + btnHoverStyle : btnStyle;
+      var style = disabled ? btnStyle + ";" + disabledStyle : hover ? btnStyle + ";" + btnHoverStyle : btnStyle;
+
+      if (hasWidth) {
+        style = "width:" + width + "cpx;" + style;
+      }
+
+      return style;
     },
     mrTextStyle: function mrTextStyle() {
       var disabled = this.disabled,
@@ -553,7 +537,7 @@ exports.default = _chameleonRuntime2.default.createComponent(exports.default).ge
 
 /***/ }),
 
-/***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/extract-text-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml":
+/***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -563,9 +547,55 @@ exports.default = _chameleonRuntime2.default.createComponent(exports.default).ge
 /***/ "./node_modules/chameleon-ui-builtin/components/button/button.wx.cml":
 /***/ (function(module, exports, __webpack_require__) {
 
-var __cml__style0 = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/extract-text-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml");
+var __cml__style0 = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml");
 var __cml__script = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml");
 
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-ui-builtin/components/button/util.js":
+/***/ (function(module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.transCls = transCls;
+function transCls(base, ctx) {
+  var type = ctx.type,
+      disabled = ctx.disabled,
+      size = ctx.size,
+      hover = ctx.hover,
+      hasWidth = ctx.hasWidth;
+
+
+  var classList = [base];
+
+  if (hover) {
+    classList.push(base + '-active');
+  }
+
+  if (!!~'red|orange|white|green'.indexOf(type)) {
+    classList.push(base + '-' + type);
+
+    if (hover) {
+      classList.push(base + '-' + type + '-active');
+    }
+
+    if (disabled) {
+      classList.push(base + '-' + type + '-disable');
+    }
+  }
+
+  if (!!~'full|big|medium|small|stretch|auto'.indexOf(size) && !hasWidth) {
+    classList.push(base + '-' + size);
+  }
+
+  if (disabled) {
+    classList.push(base + '-disable');
+  }
+
+  return classList.join(' ');
+}
 
 /***/ })
 

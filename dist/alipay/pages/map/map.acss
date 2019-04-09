@@ -65,19 +65,19 @@
     min-width: 0;
 }
 
-.cml-1c0bad5e.border-1px,
-.cml-1c0bad5e.border-top-1px,
-.cml-1c0bad5e.border-right-1px,
-.cml-1c0bad5e.border-bottom-1px,
-.cml-1c0bad5e.border-left-1px {
+.cml-1c0bad5e.cml-border-1px,
+.cml-1c0bad5e.cml-border-top-1px,
+.cml-1c0bad5e.cml-border-right-1px,
+.cml-1c0bad5e.cml-border-bottom-1px,
+.cml-1c0bad5e.cml-border-left-1px {
   position: relative;
 }
 
-.cml-1c0bad5e.border-top-1px:before,
-.cml-1c0bad5e.border-left-1px:before,
-.cml-1c0bad5e.border-1px:after,
-.cml-1c0bad5e.border-right-1px:after,
-.cml-1c0bad5e.border-bottom-1px:after {
+.cml-1c0bad5e.cml-border-top-1px:before,
+.cml-1c0bad5e.cml-border-left-1px:before,
+.cml-1c0bad5e.cml-border-1px:after,
+.cml-1c0bad5e.cml-border-right-1px:after,
+.cml-1c0bad5e.cml-border-bottom-1px:after {
   content: "";
   display: block;
   position: absolute;
@@ -87,7 +87,7 @@
   z-index: 2;
 }
 
-.cml-1c0bad5e.border-1px:after {
+.cml-1c0bad5e.cml-border-1px:after {
     border: 1rpx solid #ccc;
     left: 0;
     top: 0;
@@ -97,14 +97,14 @@
     transform-origin: 0 0;
 }
 
-.cml-1c0bad5e.border-top-1px:before {
+.cml-1c0bad5e.cml-border-top-1px:before {
   border-top: 1rpx solid #ccc;
   left: 0;
   top: 0;
   width: 100%;
 }
 
-.cml-1c0bad5e.border-right-1px:after {
+.cml-1c0bad5e.cml-border-right-1px:after {
   border-right: 1rpx solid #ccc;
   top: 0;
   right: 0;
@@ -113,7 +113,7 @@
   transform-origin: right 0;
 }
 
-.cml-1c0bad5e.border-bottom-1px:after {
+.cml-1c0bad5e.cml-border-bottom-1px:after {
   border-bottom: 1rpx solid #ccc;
   left: 0;
   bottom: 0;
@@ -122,13 +122,18 @@
   transform-origin: 0 bottom;
 }
 
-.cml-1c0bad5e.border-left-1px:before {
+.cml-1c0bad5e.cml-border-left-1px:before {
   border-left: 1rpx solid #ccc;
   top: 0;
   left: 0;
   height: 100%;
 }
 
-.cml-1c0bad5e.border-none:before, .cml-1c0bad5e.border-none:after {
+.cml-1c0bad5e.cml-border-none:before, .cml-1c0bad5e.cml-border-none:after {
     display: none;
+}
+
+.cml-1c0bad5e.cml-c-button {
+  -webkit-align-self: stretch;
+          align-self: stretch;
 }
