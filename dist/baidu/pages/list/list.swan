@@ -1,7 +1,6 @@
 <cml-buildin-page title="列表" class=" cml-base cml-page">
   <view class="container  cml-base cml-view">
     <cml-buildin-scroller scroll-direction="{{scrollDirection}}" bottom-offset="{{bottomOffset}}" bindscrolltobottom="_cmlEventProxy" data-eventscrolltobottom="onBottom" bindcustomscroll="_cmlEventProxy" data-eventcustomscroll="onScroll" height="{{-1}}" class=" cml-base cml-scroller">
-      <c-refresh display="{{ topRefreshing }}" bindrefresh="_cmlEventProxy" data-eventrefresh="onrefreshUp" class=" cml-base cml-c-refresh"></c-refresh>
       <view class=" cml-base cml-view">
         <view class="bannerImg  cml-base cml-view">
           <image src="{{topImg}}" class="topImg  cml-base cml-image" />
@@ -31,13 +30,11 @@
         </view>
       </view>
       <view class="no-more-text  cml-base cml-view" s-if=" page >= sumPage ">
-        <text class=" cml-base cml-text">没有更多了...</text>
+        <text class=" cml-base cml-text">没有更多了</text>
       </view>
-      <c-refresh s-else display="{{ bottomRefreshing }}" direction="bottom" custom-ui="{{ true }}" bindrefresh="_cmlEventProxy" data-eventrefresh="onrefreshDown" class=" cml-base cml-c-refresh">
-        <view class="loading-text  cml-base cml-view" style="{{loadingTextStyle}}">
-          <text class=" cml-base cml-text">上拉刷新...</text>
+        <view s-else class="loading-text  cml-base cml-view" style="{{loadingTextStyle}}">
+          <text class=" cml-base cml-text">加载中...</text>
         </view>
-      </c-refresh>
     </cml-buildin-scroller>
   </view>
 </cml-buildin-page>

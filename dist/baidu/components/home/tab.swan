@@ -1,4 +1,0 @@
-<view class="tab  cml-base cml-view">
-  <c-tabs tabs="{{tabs}}" bindtabclick="_cmlEventProxy" data-eventtabclick="handleTabTap" active-label="{{activeLabel}}" inline="{{false}}" has-underline="{{false}}" class=" cml-base cml-c-tabs">
-  </c-tabs>
-</view>

@@ -1,7 +1,7 @@
 <cml-buildin-page title="详情页" class=" cml-base cml-page">
   <view class="content  cml-base cml-view">
-    <cml-buildin-scroller scroll-direction="vertical" bottom-offset="{{20}}" height="{{-1}}" class=" cml-base cml-scroller">
-      <view bindtap="_cmlEventProxy" data-eventtap="forbinding" class=" cml-base cml-view">
+    <myscroller class=" cml-view cml-myscroller">
+      <view class=" cml-base cml-view">
         <swiper class="carousel-container  cml-base cml-carousel" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
           <swiper-item wx:for="{{bannerImg}}" wx:for-index="i" wx:for-item="item" wx:key="i" bindtap="_cmlEventProxy" data-eventtap="change" data-idx="{{i}}" class=" cml-base cml-carousel-item">
             <image src="{{item.imgUrl}}" class="Img  cml-base cml-image" />
@@ -9,7 +9,7 @@
         </swiper>
       </view>
       <view class="description  cml-base cml-view">
-        <view class="description-item  cml-base cml-view" wx:for="{{descriptionInfo}}" wx:for-index="i" wx:for-item="item" bindtap="_cmlEventProxy" data-eventtap="change" data-idx="{{i}}">
+        <view class="description-item  cml-base cml-view" wx:for="{{descriptionInfo}}" wx:for-index="i" wx:for-item="item" data-idx="{{i}}">
           <view class="description-item-img  cml-base cml-view">
             <image src="{{item.imgUrl}}" class="description-item-img-con  cml-base cml-image" />
           </view>
@@ -43,8 +43,8 @@
         <text class="coupon-get  cml-base cml-text">去领取</text>
       </view>
       <view class="map  cml-base cml-view">
-        <map class=" cml-base cml-map"></map>
+        <map class=" cml-view cml-map"></map>
       </view>
-    </cml-buildin-scroller>
+    </myscroller>
   </view>
 </cml-buildin-page>
