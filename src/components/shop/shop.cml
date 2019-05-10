@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-shop">
     <shop-header title="{{'购物车'}}" rightbtn="{{rightbtn}}"></shop-header>
     <view class="slogan">
       <text class="i-slg iconfont">&#xe63a; 30天无忧退换货</text>
@@ -57,7 +57,7 @@
 </script>
 <style scoped>
 
-  .wrapper{
+  .wrapper-shop{
     background-color: #f4f4f4;
     display: flex;
     flex-direction: column;
@@ -82,6 +82,7 @@
   .shop-cart{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     background-color: #ffffff;
     position: relative;
   }

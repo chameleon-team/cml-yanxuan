@@ -40,9 +40,7 @@
                 <text class="scroll-content-list-item-money">{{item.money}}</text>
                 <text class="scroll-content-list-item-tag">App特工</text>
               </view>
-
             </view>
-
           </view>
         </view>
         <view class="no-more-text" c-if="{{ page >= sumPage }}">

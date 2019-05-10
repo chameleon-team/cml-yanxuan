@@ -79,9 +79,6 @@
       },
     }
 
-    created() {
-
-    }
     mounted() {
       cml.getSystemInfo().then((info)=>{
         this.scrollerHeight = Number(info.viewportHeight) - tabbarHeight
@@ -95,7 +92,7 @@
   .iconfont {
     font-family:iconfont;
   }
-  .wrapper{
+  .wrapper-my{
     background-color: #f4f4f4;
   }
   .fbs{

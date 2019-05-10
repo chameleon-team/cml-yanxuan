@@ -1,0 +1,15 @@
+{
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#343434",
+        "navigationBarTitleText": "仿网易严选",
+        "navigationBarTextStyle": "white"
+    },
+    "pages": [
+        "pages/index/index",
+        "pages/list/list",
+        "pages/detail/detail",
+        "pages/map/map"
+    ],
+    "usingComponents": {}
+}

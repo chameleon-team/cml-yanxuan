@@ -1,0 +1,4 @@
+<view class=" cml-base cml-view">
+  <map id="myMap" style="width:100%" scale="{{scale}}" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" showLocation="{{showLocation}}" polyline="{{polyline}}" class=" cml-base cml-origin-map">
+  </map>
+</view>

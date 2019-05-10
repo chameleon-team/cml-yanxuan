@@ -1,14 +1,14 @@
 <template>
-  <view class="wrapper">
+  <view class="wrapper-topic">
     <topic-header title="{{'专题'}}"></topic-header>
-      <view class="scroller-view-box">
-        <!--<view  class="cell-button">-->
-          <!--<topic-top topics="{{topics}}"></topic-top>-->
-        <!--</view>-->
-        <view c-for="{{articles}}" class="cell-button">
-          <topic-main article="{{item}}" url=""></topic-main>
-        </view>
+    <view class="scroller-view-box">
+      <!--<view  class="cell-button">-->
+        <!--<topic-top topics="{{topics}}"></topic-top>-->
+      <!--</view>-->
+      <view c-for="{{articles}}" class="cell-button">
+        <topic-main article="{{item}}" url=""></topic-main>
       </view>
+    </view>
   </view>
 </template>
 <script>
@@ -43,8 +43,9 @@
   export default new Topic();
 </script>
 <style scoped>
-  .wrapper{
+  .wrapper-topic{
     background-color: #f4f4f4;
+    padding-bottom: 30cpx;
   }
 </style>
 <script cml-type="json">

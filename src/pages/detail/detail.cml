@@ -5,7 +5,6 @@
         <view>
           <carousel class="carousel-container" indicator-dots="{{true}}" current="{{1}}" circular="{{true}}">
             <carousel-item
-              class="carousel-carousel-item"
               c-for="{{bannerImg}}"
               c-for-index="i"
               c-for-item="item"
@@ -281,6 +280,7 @@
   .map {
     width: 750cpx;
     height: 350cpx;
+    overflow: hidden;
   }
 
 </style>

@@ -32,6 +32,12 @@
   export default new Tab();
 </script>
 
+<style scoped>
+  .c-tabs-item {
+    flex-direction: row;
+  }
+</style>
+
 <script cml-type="json">
   {
     "base": {

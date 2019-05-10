@@ -1,0 +1,4 @@
+.wrapper-topic {
+  background-color: #f4f4f4;
+  padding-bottom: 30rpx;
+}
