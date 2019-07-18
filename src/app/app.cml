@@ -1,15 +1,13 @@
 <template>
-  <app store="{{store}}" router-config="{{routerConfig}}"></app>
+  <app ></app>
 </template>
 
 <script>
-import store from '../store/index.js'
-import routerConfig from '../router.config.json';
+
 
 class App {
   data = {
-    store,
-    routerConfig
+    
   }
   created(res) {
   }

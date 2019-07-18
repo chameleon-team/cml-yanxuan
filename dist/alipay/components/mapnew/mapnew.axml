@@ -1,4 +1,0 @@
-<view class=" cml-base cml-view cml-e0c470fc">
-  <map id="map" longitude="120.131441" latitude="30.279383" scale="{{scale}}" controls="{{controls}}" onControlTap="controltap" markers="{{markers}}" show-location style="width:100%;height:150px" include-points="{{includePoints}}" class=" cml-base cml-origin-map cml-e0c470fc">
-  </map>
-</view>

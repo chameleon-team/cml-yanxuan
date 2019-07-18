@@ -7,13 +7,19 @@
   "license": "Apache",
   "email": "ChameleonCore@didiglobal.com",
   "dependencies": {
-    "chameleon-api": "^0.4.1",
-    "chameleon-bridge": "^0.1.2",
-    "chameleon-runtime": "^0.1.4",
+    "vue-amap": "0.5.8",
+    "chameleon-api": "^0.4.3",
+    "chameleon-bridge": "0.1.2",
+    "chameleon-runtime": "0.1.4",
     "chameleon-store": "0.0.3",
-    "chameleon-ui-builtin": "^0.2.0",
-    "cml-ui": "^0.1.5",
-    "vue-amap": "0.5.8"
+    "chameleon-ui-builtin": "0.4.0-mvvm.3",
+    "cml-tt-api": "^0.0.19",
+    "cml-tt-plugin": "^0.0.19",
+    "cml-tt-runtime": "^0.0.19",
+    "cml-tt-store": "^0.0.19",
+    "cml-tt-ui": "^0.0.19",
+    "cml-tt-ui-builtin": "^0.0.19",
+    "cml-ui": "^0.3.0-alpha.1"
   },
   "scripts": {
     "deploy": "sh deploy.sh weex && sh deploy.sh web"
