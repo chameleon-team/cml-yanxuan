@@ -55,7 +55,7 @@
 </template>
 <script>
   import cml from 'cml-tt-api'
-  import listData from '../../assets/json/listImages.json';
+  import listData from '../../assets/json/listImages.js';
   class List {
     data = {
       topRefreshing: false,

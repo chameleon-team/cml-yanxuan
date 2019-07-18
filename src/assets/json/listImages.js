@@ -1,4 +1,4 @@
-{
+module.exports = {
   "code": 0,
   "data": {
     "topImgUrl": "https://cmljs.org/cml-demo/src/assets/images/yanxuan/4972949f269e7295a4f37e99a303553e.jpg",

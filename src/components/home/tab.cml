@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import store from '../../../../../store'
   class Tab {
     data = {
       animationData: {},
@@ -26,7 +25,6 @@
       }
     }
     created() {
-      this.tabs = store.state.yanxuan.tabs;
     }
   }
   export default new Tab();
@@ -42,7 +40,7 @@
   {
     "base": {
       "usingComponents": {
-          "c-tabs": "cml-ui/components/c-tab/c-tab"
+          "c-tabs": "cml-tt-ui/components/c-tab/c-tab"
       }
     }
   }

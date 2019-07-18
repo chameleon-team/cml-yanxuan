@@ -19,7 +19,7 @@
 
 <script>
   import cml from 'cml-tt-api';
-  import homeData from '../../assets/json/getHomeImgList.json'
+  import homeData from '../../assets/json/getHomeImgList.js'
   class Special {
     data = {
       special: '',

@@ -12,7 +12,7 @@ cml.config.merge({
   buildInfo: {
     wxAppId: '123456'
   },
-  builtinNpmName: 'cml-tt-ui-builtin',
+  // builtinNpmName: 'cml-tt-ui-builtin',
   extPlatform: {
     tt: 'cml-tt-plugin',
   },

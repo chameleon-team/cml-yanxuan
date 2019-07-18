@@ -66,7 +66,7 @@
 
 <script>
   import cml from 'cml-tt-api'
-  import detailData from '../../assets/json/detailInfo.json';
+  import detailData from '../../assets/json/detailInfo.js';
   class Detail {
     data = {
       bannerImg: [],

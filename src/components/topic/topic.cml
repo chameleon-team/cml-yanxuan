@@ -13,7 +13,7 @@
 </template>
 <script>
   import cml from "cml-tt-api";
-  import yanxuanData from '../../assets/json/yanxuan.json';
+  import yanxuanData from '../../assets/json/yanxuan.js';
   const headerHeight = 114;
   const tabbarHeight = 90;
   class Topic   {
