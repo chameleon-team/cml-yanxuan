@@ -13,12 +13,12 @@
     "chameleon-runtime": "0.1.4",
     "chameleon-store": "0.0.3",
     "chameleon-ui-builtin": "0.4.0-mvvm.3",
-    "cml-tt-api": "^0.0.19",
-    "cml-tt-plugin": "^0.0.19",
-    "cml-tt-runtime": "^0.0.19",
-    "cml-tt-store": "^0.0.19",
-    "cml-tt-ui": "^0.0.19",
-    "cml-tt-ui-builtin": "^0.0.19",
+    "cml-tt-api": "^0.0.22",
+    "cml-tt-plugin": "^0.0.22",
+    "cml-tt-runtime": "^0.0.22",
+    "cml-tt-store": "^0.0.22",
+    "cml-tt-ui": "^0.0.22",
+    "cml-tt-ui-builtin": "^0.0.22",
     "cml-ui": "^0.3.0-alpha.1"
   },
   "scripts": {
