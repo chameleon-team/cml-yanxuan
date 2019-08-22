@@ -51,6 +51,9 @@ class Map implements MapInterface {
       this.latitude = info.lat;
       this.longitude = info.lng;
     })
+    this.$cmlEmit('onshow', {
+        value: this.name
+      })
   }
 
   beforeDestroy() {

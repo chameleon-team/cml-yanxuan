@@ -1,1 +1,273 @@
-var __CML__GLOBAL=require("../../../../manifest.js");__CML__GLOBAL.webpackJsonp([1],{162:function(t,e,r){r(163),r(164)},163:function(t,e){},164:function(t,e,r){function n(t){return t&&t.__esModule?t:{default:t}}function o(t){return function(){var e=t.apply(this,arguments);return new Promise(function(t,r){function n(o,i){try{var a=e[o](i),u=a.value}catch(t){return void r(t)}if(!a.done)return Promise.resolve(u).then(function(t){n("next",t)},function(t){n("throw",t)});t(u)}return n("next")})}}function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var a=r(165),u=n(a),c=r(3),l=n(c),f=r(168),s=n(f),h=r(170),p=n(h),d=r(171),y=n(d),v=function(){function t(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n)}}return function(e,r,n){return r&&t(e.prototype,r),n&&t(e,n),e}}(),m=r(0),g=n(m),w=function(){function t(){i(this,t),this.props={cstyle:{type:String,default:""},bottomOffset:{type:Number,default:0},scrollDirection:{type:String,default:"vertical"},bounce:{type:Boolean,default:!0},height:{type:Number,default:0},width:{type:Number,default:0},scrollTop:{type:Number,default:0},scrollLeft:{type:Number,default:0}},this.data={cmtStyle:""},this.computed={wrapperStyle:function(){if("vertical"===this.scrollDirection){if(this.height>=0)return this.cstyle+";height:"+this.height+"rpx;"}else if(this.width>=0)return this.cstyle+";width:"+this.width+"rpx;white-space:nowrap;";return this.cmtStyle+this.cstyle},scrollTopPx:function(){return(0,y.default)(this.scrollTop)},scrollLeftPx:function(){return(0,y.default)(this.scrollLeft)}},this.methods={onScroll:function(t){var e=t.detail;e.deltaX=e.deltaX||0,e.deltaY=e.deltaY||0,Object.keys(e).forEach(function(t){e[t]=(0,p.default)(e[t])}),this.$cmlEmit("onscroll",e),this.$cmlEmit("customscroll",e)},onBottom:function(t){this.$cmlEmit("scrolltobottom",t.detail)}}}return v(t,[{key:"mounted",value:function(){var t=this;setTimeout(o(u.default.mark(function e(){var r,n,o,i;return u.default.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:if("vertical"!==t.scrollDirection||t.height){e.next=3;break}return console.error("纵向滚动必须传递高度属性"),e.abrupt("return");case 3:if("vertical"===t.scrollDirection||t.width){e.next=6;break}return console.error("横向滚动必须传递宽度属性"),e.abrupt("return");case 6:if(-1!==t.height&&-1!==t.width){e.next=14;break}return e.next=9,(0,s.default)("c-scroller",t);case 9:return r=e.sent,e.next=12,(0,l.default)();case 12:n=e.sent,"vertical"===t.scrollDirection?(o=n.viewportHeight-r.top,t.cmtStyle="height:"+o+"cpx;"):(i=n.viewportWidth-r.left,t.cmtStyle="width:"+i+"cpx;white-space:nowrap;");case 14:case"end":return e.stop()}},e,t)})),200)}}]),t}();e.default=new w,e.default=g.default.createComponent(e.default).getOptions()},165:function(t,e,r){t.exports=r(166)},166:function(t,e,r){var n=function(){return this}()||Function("return this")(),o=n.regeneratorRuntime&&Object.getOwnPropertyNames(n).indexOf("regeneratorRuntime")>=0,i=o&&n.regeneratorRuntime;if(n.regeneratorRuntime=void 0,t.exports=r(167),o)n.regeneratorRuntime=i;else try{delete n.regeneratorRuntime}catch(t){n.regeneratorRuntime=void 0}},167:function(t,e){!function(e){"use strict";function r(t,e,r,n){var i=e&&e.prototype instanceof o?e:o,a=Object.create(i.prototype),u=new p(n||[]);return a._invoke=l(t,r,u),a}function n(t,e,r){try{return{type:"normal",arg:t.call(e,r)}}catch(t){return{type:"throw",arg:t}}}function o(){}function i(){}function a(){}function u(t){["next","throw","return"].forEach(function(e){t[e]=function(t){return this._invoke(e,t)}})}function c(t){function e(r,o,i,a){var u=n(t[r],t,o);if("throw"!==u.type){var c=u.arg,l=c.value;return l&&"object"==typeof l&&g.call(l,"__await")?Promise.resolve(l.__await).then(function(t){e("next",t,i,a)},function(t){e("throw",t,i,a)}):Promise.resolve(l).then(function(t){c.value=t,i(c)},a)}a(u.arg)}function r(t,r){function n(){return new Promise(function(n,o){e(t,r,n,o)})}return o=o?o.then(n,n):n()}var o;this._invoke=r}function l(t,e,r){var o=O;return function(i,a){if(o===j)throw new Error("Generator is already running");if(o===k){if("throw"===i)throw a;return y()}for(r.method=i,r.arg=a;;){var u=r.delegate;if(u){var c=f(u,r);if(c){if(c===S)continue;return c}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if(o===O)throw o=k,r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);o=j;var l=n(t,e,r);if("normal"===l.type){if(o=r.done?k:P,l.arg===S)continue;return{value:l.arg,done:r.done}}"throw"===l.type&&(o=k,r.method="throw",r.arg=l.arg)}}}function f(t,e){var r=t.iterator[e.method];if(r===v){if(e.delegate=null,"throw"===e.method){if(t.iterator.return&&(e.method="return",e.arg=v,f(t,e),"throw"===e.method))return S;e.method="throw",e.arg=new TypeError("The iterator does not provide a 'throw' method")}return S}var o=n(r,t.iterator,e.arg);if("throw"===o.type)return e.method="throw",e.arg=o.arg,e.delegate=null,S;var i=o.arg;return i?i.done?(e[t.resultName]=i.value,e.next=t.nextLoc,"return"!==e.method&&(e.method="next",e.arg=v),e.delegate=null,S):i:(e.method="throw",e.arg=new TypeError("iterator result is not an object"),e.delegate=null,S)}function s(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function h(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function p(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(s,this),this.reset(!0)}function d(t){if(t){var e=t[b];if(e)return e.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var r=-1,n=function e(){for(;++r<t.length;)if(g.call(t,r))return e.value=t[r],e.done=!1,e;return e.value=v,e.done=!0,e};return n.next=n}}return{next:y}}function y(){return{value:v,done:!0}}var v,m=Object.prototype,g=m.hasOwnProperty,w="function"==typeof Symbol?Symbol:{},b=w.iterator||"@@iterator",x=w.asyncIterator||"@@asyncIterator",_=w.toStringTag||"@@toStringTag",L="object"==typeof t,E=e.regeneratorRuntime;if(E)return void(L&&(t.exports=E));E=e.regeneratorRuntime=L?t.exports:{},E.wrap=r;var O="suspendedStart",P="suspendedYield",j="executing",k="completed",S={},N={};N[b]=function(){return this};var R=Object.getPrototypeOf,M=R&&R(R(d([])));M&&M!==m&&g.call(M,b)&&(N=M);var T=a.prototype=o.prototype=Object.create(N);i.prototype=T.constructor=a,a.constructor=i,a[_]=i.displayName="GeneratorFunction",E.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return!!e&&(e===i||"GeneratorFunction"===(e.displayName||e.name))},E.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,a):(t.__proto__=a,_ in t||(t[_]="GeneratorFunction")),t.prototype=Object.create(T),t},E.awrap=function(t){return{__await:t}},u(c.prototype),c.prototype[x]=function(){return this},E.AsyncIterator=c,E.async=function(t,e,n,o){var i=new c(r(t,e,n,o));return E.isGeneratorFunction(e)?i:i.next().then(function(t){return t.done?t.value:i.next()})},u(T),T[_]="Generator",T[b]=function(){return this},T.toString=function(){return"[object Generator]"},E.keys=function(t){var e=[];for(var r in t)e.push(r);return e.reverse(),function r(){for(;e.length;){var n=e.pop();if(n in t)return r.value=n,r.done=!1,r}return r.done=!0,r}},E.values=d,p.prototype={constructor:p,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=v,this.done=!1,this.delegate=null,this.method="next",this.arg=v,this.tryEntries.forEach(h),!t)for(var e in this)"t"===e.charAt(0)&&g.call(this,e)&&!isNaN(+e.slice(1))&&(this[e]=v)},stop:function(){this.done=!0;var t=this.tryEntries[0],e=t.completion;if("throw"===e.type)throw e.arg;return this.rval},dispatchException:function(t){function e(e,n){return i.type="throw",i.arg=t,r.next=e,n&&(r.method="next",r.arg=v),!!n}if(this.done)throw t;for(var r=this,n=this.tryEntries.length-1;n>=0;--n){var o=this.tryEntries[n],i=o.completion;if("root"===o.tryLoc)return e("end");if(o.tryLoc<=this.prev){var a=g.call(o,"catchLoc"),u=g.call(o,"finallyLoc");if(a&&u){if(this.prev<o.catchLoc)return e(o.catchLoc,!0);if(this.prev<o.finallyLoc)return e(o.finallyLoc)}else if(a){if(this.prev<o.catchLoc)return e(o.catchLoc,!0)}else{if(!u)throw new Error("try statement without catch or finally");if(this.prev<o.finallyLoc)return e(o.finallyLoc)}}}},abrupt:function(t,e){for(var r=this.tryEntries.length-1;r>=0;--r){var n=this.tryEntries[r];if(n.tryLoc<=this.prev&&g.call(n,"finallyLoc")&&this.prev<n.finallyLoc){var o=n;break}}o&&("break"===t||"continue"===t)&&o.tryLoc<=e&&e<=o.finallyLoc&&(o=null);var i=o?o.completion:{};return i.type=t,i.arg=e,o?(this.method="next",this.next=o.finallyLoc,S):this.complete(i)},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&e&&(this.next=e),S},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.finallyLoc===t)return this.complete(r.completion,r.afterLoc),h(r),S}},catch:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.tryLoc===t){var n=r.completion;if("throw"===n.type){var o=n.arg;h(r)}return o}}throw new Error("illegal catch attempt")},delegateYield:function(t,e,r){return this.delegate={iterator:d(t),resultName:e,nextLoc:r},"next"===this.method&&(this.arg=v),S}}}(function(){return this}()||Function("return this")())},168:function(t,e,r){function n(t,e){return new Promise(function(r,n){var o=(0,a.getRefObj)(t,e);i.default.getRect(o,function(t){r(t)})})}Object.defineProperty(e,"__esModule",{value:!0}),e.default=n;var o=r(169),i=function(t){return t&&t.__esModule?t:{default:t}}(o),a=r(6)},169:function(t,e,r){function n(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var o=function(){function t(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n)}}return function(e,r,n){return r&&t(e.prototype,r),n&&t(e,n),e}}(),i=r(1),a=function(){function t(){n(this,t)}return o(t,[{key:"getRect",value:function(t,e){var r=wx.createSelectorQuery().in(t.context);r.select("#"+t.id).boundingClientRect(),r.exec(function(t){wx.getSystemInfo({success:function(r){var n=r.windowWidth,o=750/n,i={width:t[0]&&t[0].width*o||0,height:t[0]&&t[0].height*o||0,left:t[0]&&t[0].left*o||0,top:t[0]&&t[0].top*o||0,right:t[0]&&t[0].right*o||0,bottom:t[0]&&t[0].bottom*o||0};e(i)}})})}}]),t}();e.default=new a,(0,i.copyProtoProperty)(e.default)},170:function(t,e,r){function n(t){return"number"!=typeof t?void console.error("Parameter must be a number"):+(750/i.default.getWidth()*t).toFixed(3)}Object.defineProperty(e,"__esModule",{value:!0}),e.default=n;var o=r(24),i=function(t){return t&&t.__esModule?t:{default:t}}(o)},171:function(t,e,r){function n(t){return"number"!=typeof t?void console.error("Parameter must be a number"):+(i.default.getWidth()/750*t).toFixed(3)}Object.defineProperty(e,"__esModule",{value:!0}),e.default=n;var o=r(24),i=function(t){return t&&t.__esModule?t:{default:t}}(o)},24:function(t,e,r){function n(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var o=function(){function t(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n)}}return function(e,r,n){return r&&t(e.prototype,r),n&&t(e,n),e}}(),i=r(1),a=function(){function t(){n(this,t)}return o(t,[{key:"getWidth",value:function(){return wx.getSystemInfoSync().windowWidth}}]),t}();e.default=new a,(0,i.copyProtoProperty)(e.default)}},[162]);
+var __CML__GLOBAL = require("../../../../manifest.js");
+__CML__GLOBAL.webpackJsonp([32],{
+
+/***/ "../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/work/chameleon-open/chameleon/packages/chameleon-tool/chameleon.js\"}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/scroller/scroller.wx.cml":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _regenerator = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _index = __webpack_require__("./node_modules/chameleon-api/src/interfaces/getSystemInfo/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/getRect/index.js");
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/px2cpx/index.js");
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/cpx2px/index.js");
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _chameleonRuntime = __webpack_require__("./node_modules/chameleon-runtime/index.js");
+
+var _chameleonRuntime2 = _interopRequireDefault(_chameleonRuntime);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __INTERFACE__FILEPATH = "/Users/didi/work/chameleon-space/cml-open-demos/cml-yanxuan/node_modules/chameleon-ui-builtin/components/scroller/scroller.interface";
+var __CML_ERROR__ = function throwError(content) {
+  throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
+};
+
+var __enableTypes__ = [];
+var __INTERFAE__DEFINES__ = {
+  "types": {
+    "scrollEventDetail": {
+      "deltaX": "Number",
+      "deltaY": "Number",
+      "scrollHeight": "Number",
+      "scrollLeft": "Number",
+      "scrollTop": "Number",
+      "scrollWidth": "Number"
+    },
+    "scrolltobottomEventDetail": {
+      "direction": "String"
+    }
+  },
+  "interfaces": {
+    "ScrollerInterface": {
+      "cstyle": "String",
+      "bottomOffset": "Number",
+      "scrollDirection": "String",
+      "bounce": "Boolean",
+      "height": "Number",
+      "width": "Number",
+      "scrollTop": "Number",
+      "scrollLeft": "Number",
+      "onscroll": {
+        "input": ["scrollEventDetail"],
+        "output": "Undefined"
+      },
+      "customscroll": {
+        "input": ["scrollEventDetail"],
+        "output": "Undefined"
+      },
+      "scrolltobottom": {
+        "input": ["scrolltobottomEventDetail"],
+        "output": "Undefined"
+      }
+    }
+  },
+  "classes": {}
+};
+var __CML__DEFINES__ = {
+  "types": {},
+  "interfaces": {},
+  "classes": {
+    "Scroller": ["ScrollerInterface"]
+  }
+};
+var __CML__WRAPPER__ = __webpack_require__("../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-loader/src/runtime/check.js");
+
+var Scroller = function () {
+  function Scroller() {
+    _classCallCheck(this, Scroller);
+
+    this.props = {
+      cstyle: {
+        type: String,
+        default: ''
+      },
+      bottomOffset: {
+        // 距底部/右边多远时（单位px），触发 scrolltolower 事件
+        type: Number,
+        default: 0
+      },
+      scrollDirection: {
+        // 可选为 horizontal 或者 vertical，默认值为 vertical 。定义滚动的方向。
+        type: String,
+        default: 'vertical'
+      },
+      bounce: {
+        type: Boolean,
+        default: true
+      },
+      height: {
+        type: Number,
+        default: 0
+      },
+      width: {
+        type: Number,
+        default: 0
+      },
+      scrollTop: {
+        type: Number,
+        default: 0
+      },
+      scrollLeft: {
+        type: Number,
+        default: 0
+      }
+    };
+    this.data = {
+      cmtStyle: ''
+    };
+    this.computed = {
+      wrapperStyle: function wrapperStyle() {
+        if (this.scrollDirection === 'vertical') {
+          if (this.height >= 0) {
+            return this.cstyle + ";height:" + this.height + "rpx;";
+          }
+        } else {
+          if (this.width >= 0) {
+            return this.cstyle + ";width:" + this.width + "rpx;white-space:nowrap;";
+          }
+        } // 没有传递的情况
+
+
+        return this.cmtStyle + this.cstyle;
+      },
+      scrollTopPx: function scrollTopPx() {
+        // scroll-top仅支持px
+        return (0, _index8.default)(this.scrollTop);
+      },
+      scrollLeftPx: function scrollLeftPx() {
+        return (0, _index8.default)(this.scrollLeft);
+      }
+    };
+    this.methods = {
+      onScroll: function onScroll(e) {
+        var detail = e.detail;
+        detail.deltaX = detail.deltaX || 0;
+        detail.deltaY = detail.deltaY || 0;
+        Object.keys(detail).forEach(function (key) {
+          detail[key] = (0, _index6.default)(detail[key]);
+        });
+        this.$cmlEmit('onscroll', detail);
+        this.$cmlEmit('customscroll', detail);
+      },
+      onBottom: function onBottom(e) {
+        this.$cmlEmit('scrolltobottom', e.detail);
+      }
+    };
+  }
+
+  _createClass(Scroller, [{
+    key: "mounted",
+    value: function mounted() {
+      var _this = this;
+
+      setTimeout(_asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+        var rectData, windowRect, height, width;
+        return _regenerator2.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this.scrollDirection === 'vertical' && !_this.height)) {
+                  _context.next = 3;
+                  break;
+                }
+
+                console.error('纵向滚动必须传递高度属性');
+                return _context.abrupt("return");
+
+              case 3:
+                if (!(_this.scrollDirection !== 'vertical' && !_this.width)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                console.error('横向滚动必须传递宽度属性');
+                return _context.abrupt("return");
+
+              case 6:
+                if (!(_this.height === -1 || _this.width === -1)) {
+                  _context.next = 14;
+                  break;
+                }
+
+                _context.next = 9;
+                return (0, _index4.default)('c-scroller', _this);
+
+              case 9:
+                rectData = _context.sent;
+                _context.next = 12;
+                return (0, _index2.default)();
+
+              case 12:
+                windowRect = _context.sent;
+
+
+                if (_this.scrollDirection === 'vertical') {
+                  height = windowRect.viewportHeight - rectData.top;
+
+                  _this.cmtStyle = "height:" + height + "cpx;";
+                } else {
+                  width = windowRect.viewportWidth - rectData.left;
+
+                  _this.cmtStyle = "width:" + width + "cpx;white-space:nowrap;";
+                }
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      })), 200);
+    }
+  }]);
+
+  return Scroller;
+}();
+
+exports.default = __CML__WRAPPER__(new Scroller(), __CML_ERROR__, __enableTypes__, __INTERFAE__DEFINES__, __CML__DEFINES__);
+
+
+exports.default = _chameleonRuntime2.default.createComponent(exports.default).getOptions();
+
+/***/ }),
+
+/***/ "../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/vue-style-loader/index.js!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/work/chameleon-open/chameleon/packages/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/scroller/scroller.wx.cml":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-ui-builtin/components/scroller/scroller.wx.cml":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __cml__style0 = __webpack_require__("../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/vue-style-loader/index.js!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/work/chameleon-open/chameleon/packages/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/scroller/scroller.wx.cml");
+var __cml__script = __webpack_require__("../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/work/chameleon-open/chameleon/packages/chameleon-tool/chameleon.js\"}!../../../chameleon-open/chameleon/packages/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/scroller/scroller.wx.cml");
+
+
+/***/ })
+
+},["./node_modules/chameleon-ui-builtin/components/scroller/scroller.wx.cml"]);
