@@ -9,6 +9,7 @@
   "dependencies": {
     "chameleon-api": "^1.0.1",
     "chameleon-bridge": "^0.2.0",
+    "chameleon-css-loader": "^1.0.3",
     "chameleon-runtime": "1.0.0",
     "chameleon-store": "1.0.0",
     "chameleon-ui-builtin": "^1.0.1",
