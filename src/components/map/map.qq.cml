@@ -7,7 +7,7 @@
 
 <script>
   import cml from 'cml-quickapp-api';
-  import amapFile from './amap-wx';
+  
   var markersData = [];
   class Map implements MapInterface {
     props = {
@@ -50,19 +50,7 @@
         value: this.name
       })
 
-      var myAmapFun = new amapFile.AMapWX({key: 'b7f499f3cc98e7170b361d77c2e12c17'});
-      myAmapFun.getPoiAround({
-        success: function (data) {
-          markersData = data.markers;
-          me.markers = markersData;
-          me.latitude = markersData[0].latitude;
-          me.longitude = markersData[0].longitude;
-          me.showMarkerInfo(markersData, 0);
-        },
-        fail: function (info) {
-          cml.showToast({message: JSON.stringify(info.errMsg)});
-        }
-      })
+
 
     }
   }

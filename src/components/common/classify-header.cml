@@ -1,14 +1,14 @@
 <template>
-  <view class="wrapper-classify-header" >
+  <view class="wrapper" >
     <text class="search iconfont">搜索商品，共8888款好物</text>
   </view>
 </template>
 <script>
-  class ClassifyHeader { }
-  export default new ClassifyHeader();
+  class Yanxuan { }
+  export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper-classify-header{
+  .wrapper{
     width: 750cpx;
     height: 114cpx;
     padding-top: 30cpx;

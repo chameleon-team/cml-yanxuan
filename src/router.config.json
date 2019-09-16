@@ -10,19 +10,19 @@
     },
     {
       "url": "/cml/h5/list",
-      "path": "/pages/list/list",
+      "path": "/pages/list/index",
       "name": "列表",
       "mock": "index.php"
     },
     {
       "url": "/cml/h5/detail",
-      "path": "/pages/detail/detail",
+      "path": "/pages/detail/index",
       "name": "详情页",
       "mock": "index.php"
     },
     {
       "url": "/cml/h5/map",
-      "path": "/pages/map/map",
+      "path": "/pages/map/index",
       "name": "地图",
       "mock": "index.php"
     }

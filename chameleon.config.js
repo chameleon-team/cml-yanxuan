@@ -3,13 +3,41 @@
 const publicPath = 'https://chameleon-team.github.io/cml-yanxuan/dist';
 // 设置api请求前缀
 const apiPrefix = 'https://chameleon-team.github.io';
+const path = require('path');
 
 cml.config.merge({
   templateLang: "cml",
   templateType: "html",
-  platforms: ["web","baidu","alipay","wx","weex"],
+  builtinNpmName: 'cml-quickapp-ui-builtin',
+  extPlatform: {
+    quickapp: 'cml-quickapp-plugin',
+  },
+  babelPath: [
+    path.join(__dirname,'node_modules/cml-quickapp-ui-builtin'),
+    path.join(__dirname,'node_modules/cml-quickapp-runtime'),
+    path.join(__dirname,'node_modules/cml-quickapp-api'),
+    path.join(__dirname,'node_modules/cml-quickapp-ui'),
+    path.join(__dirname,'node_modules/cml-quickapp-store'),
+    path.join(__dirname,'node_modules/cml-quickapp-mixins'),
+    path.join(__dirname,'node_modules/mobx'),
+  ],
+  platforms: ["web","weex","wx","alipay","baidu", "quickapp"],
   buildInfo: {
     wxAppId: '123456'
+  },
+  baseStyle: {
+    quickapp: true
+  },
+  quickapp: {
+    dev: {
+      // moduleIdType: 'name',
+      minimize: false,
+      increase: true
+    },
+    build: {
+      minimize: true,
+      hash: false
+    }
   },
   wx: {
     dev: {
@@ -21,7 +49,7 @@ cml.config.merge({
   web: {
     dev: {
       analysis: false,
-      console: true
+      console: false
     },
     build: {
       analysis: false,
@@ -34,8 +62,7 @@ cml.config.merge({
     },
     build: {
       publicPath: `${publicPath}/weex/`,
-      apiPrefix,
-      hash: false
+      apiPrefix
     },
     custom: {
       publicPath: `${publicPath}/wx/`,
@@ -43,4 +70,3 @@ cml.config.merge({
     }
   }
 })
-

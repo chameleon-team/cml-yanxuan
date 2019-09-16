@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import cml from 'chameleon-api';
+import cml from 'cml-quickapp-api';
 class Map implements MapInterface {
   props = {
     name: {
@@ -51,9 +51,6 @@ class Map implements MapInterface {
       this.latitude = info.lat;
       this.longitude = info.lng;
     })
-    this.$cmlEmit('onshow', {
-        value: this.name
-      })
   }
 
   beforeDestroy() {

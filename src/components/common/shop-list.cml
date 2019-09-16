@@ -1,6 +1,5 @@
-
 <template>
-  <view class="wrapper-goods">
+  <view class="wrapper">
     <text class="tlt">猜你喜欢</text>
     <view class="gb-box">
       <view class="i-gd" c-for="{{goods}}" data-url='{{item.url}}' c-bind:tap="jumpWeb">
@@ -15,9 +14,9 @@
   </view>
 </template>
 <script>
-  import cml from 'chameleon-api';
+  import cml from 'cml-quickapp-api';
 
-  class ShopList {
+  class Yanxuan {
     props = {
       goods: {
         type: Array,
@@ -32,10 +31,10 @@
 
   }
 
-  export default new ShopList();
+  export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper-goods {
+  .wrapper {
     background-color: #fff;
     padding-bottom: 10cpx;
     padding-top: 26cpx;

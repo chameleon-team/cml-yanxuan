@@ -12,7 +12,7 @@
 
 <script>
   import store from '../../../../../store'
-  class Tab {
+  class Index {
     data = {
       animationData: {},
       tabs: [],
@@ -29,20 +29,14 @@
       this.tabs = store.state.yanxuan.tabs;
     }
   }
-  export default new Tab();
+  export default new Index();
 </script>
-
-<style scoped>
-  .c-tabs-item {
-    flex-direction: row;
-  }
-</style>
 
 <script cml-type="json">
   {
     "base": {
       "usingComponents": {
-          "c-tabs": "cml-ui/components/c-tab/c-tab"
+          "c-tabs": "cml-quickapp-ui/components/c-tab/c-tab"
       }
     }
   }

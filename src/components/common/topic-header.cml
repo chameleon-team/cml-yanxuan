@@ -10,7 +10,7 @@
   </view>
 </template>
 <script>
-  class TopicHeader {
+  class Yanxuan {
     props = {
       title: {
         type: String
@@ -24,7 +24,7 @@
     }
   }
 
-  export default new TopicHeader();
+  export default new Yanxuan();
 </script>
 <style scoped>
   .wrapper {

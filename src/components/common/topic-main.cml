@@ -1,5 +1,5 @@
 <template>
-  <view class="wrapper-topic-main">
+  <view class="wrapper">
     <view class="auther-box" c-bind:tap="godetail">
       <image class="auther-img" resize="cover" src="{{article.autherimg}}"></image>
       <text class="auther-name">{{article.auther}}</text>
@@ -26,9 +26,9 @@
   </view>
 </template>
 <script>
-  import cml from "chameleon-api";
+  import cml from 'cml-quickapp-api';
 
-  class TopicMain {
+  class Yanxuan {
     props = {
       article: {
         type: Object,
@@ -52,17 +52,17 @@
     methods = {
       godetail() {
         cml.navigateTo({
-          "path": "/pages/detail/detail"
+          "path": "/pages/detail/index"
         });
       }
     }
 
   }
 
-  export default new TopicMain();
+  export default new Yanxuan();
 </script>
 <style scoped>
-  .wrapper-topic-main {
+  .wrapper {
     background-color: #fff;
     padding-top: 15cpx;
     padding-bottom: 15cpx;

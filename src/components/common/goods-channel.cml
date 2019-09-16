@@ -1,6 +1,6 @@
 <template>
   <view class="container border-bottom-1px">
-    <scroller class="scroller" scroll-direction="horizontal" height="{{-1}}">
+    <scroller class="scroller" cstyle="" scroll-direction="horizontal" width="{{-1}}">
       <view class="wrapper">
         <view class="j-uline" ref="jcLine"></view>
         <text class="i-c c-act">推荐</text>
@@ -21,12 +21,12 @@
   </view>
 </template>
 <script>
-  class GoodsChannel {
+  class Yanxuan {
 
 
   }
 
-  export default new GoodsChannel();
+  export default new Yanxuan();
 </script>
 <style scoped>
   .container {
