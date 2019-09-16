@@ -25,7 +25,7 @@ export default new App();
   {
     "quickapp": {
       "package": "com.application.yanxuan",
-      "name": "严选",
+      "name": "cml-yanxuan",
       "versionName": "1.0.0",
       "versionCode": "1",
       "minPlatformVersion": "1020",
